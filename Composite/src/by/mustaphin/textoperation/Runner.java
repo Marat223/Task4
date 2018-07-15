@@ -3,19 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package composite;
+package by.mustaphin.textoperation;
+
+import by.mustaphin.textoperation.parse.TextReader;
 
 /**
  *
  * @author me
  */
-public class Composite {
+public class Runner {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-	// TODO code application logic here
+	TextReader textReader = new TextReader();
+	System.out.println(textReader.read());
     }
-    
+
 }
