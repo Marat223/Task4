@@ -11,7 +11,7 @@ package by.mustaphin.textoperation.composite;
  */
 public interface IComponent {
 
-    void operate();
+    String toString();
 
     boolean add(IComponent component);
 

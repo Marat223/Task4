@@ -12,18 +12,22 @@ import java.util.List;
  * @author me
  */
 public class AbstractComposite implements IComponent {
-
+    
     protected List<IComponent> components;
-
+    
     public AbstractComposite(List<IComponent> components) {
 	this.components = components;
     }
-
+    
     @Override
-    public void operate() {
-	
+    public String toString() {
+	StringBuilder stringBuilder = new StringBuilder();
+	for (IComponent component : components) {
+	    stringBuilder.append(component.toString()).append(" ");
+	}
+	return stringBuilder.toString();
     }
-
+    
     @Override
     public boolean add(IComponent component) {
 	boolean addSuccessfuly = false;
@@ -34,7 +38,7 @@ public class AbstractComposite implements IComponent {
 	}
 	return addSuccessfuly;
     }
-
+    
     @Override
     public boolean remove(IComponent component) {
 	boolean removeSuccessfuly = false;
@@ -45,11 +49,11 @@ public class AbstractComposite implements IComponent {
 	}
 	return removeSuccessfuly;
     }
-
+    
     @Override
     public IComponent get(int index) {
 	return components.get(index);
-
+	
     }
-
+    
 }

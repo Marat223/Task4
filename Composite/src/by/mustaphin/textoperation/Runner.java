@@ -6,6 +6,8 @@
 package by.mustaphin.textoperation;
 
 import by.mustaphin.textoperation.parse.TextReader;
+import by.mustaphin.textoperation.parse.chain.ParagraphDivideHandler;
+import java.util.Arrays;
 
 /**
  *
@@ -18,7 +20,9 @@ public class Runner {
      */
     public static void main(String[] args) {
 	TextReader textReader = new TextReader();
-	System.out.println(textReader.read());
+	ParagraphDivideHandler paragraphDivideHandler = new ParagraphDivideHandler();
+	paragraphDivideHandler.handleRequest(Arrays.asList("    Hello, World!\n    I'm here!\n    zzzzz\n"));
+//	System.out.println(textReader.read());
     }
 
 }
