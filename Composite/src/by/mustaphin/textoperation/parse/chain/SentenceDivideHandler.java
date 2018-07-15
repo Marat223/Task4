@@ -15,19 +15,22 @@ import java.util.regex.Pattern;
  *
  * @author me
  */
-public class ParagraphDivideHandler extends AbstractHandler {
+public class SentenceDivideHandler extends AbstractHandler {
 
-    public ParagraphDivideHandler(AbstractHandler successor) {
-	super(successor);
-    }
-    
     @Override
     public void handleRequest(List<String> text) {
-	Pattern patternParagraph = Pattern.compile(RegularExpression.PARAGRAPH);
-	Matcher matcher = patternParagraph.matcher(text.get(0));
+	List<String> sentences = new ArrayList<>(text);
 	text = new ArrayList<>();
-	while (matcher.find()) {
-	    text.add(matcher.group());
+	Pattern patternParagraph = Pattern.compile(RegularExpression.SENTENCE);
+	for (String sentence : sentences) {
+	    Matcher matcher = patternParagraph.matcher(sentence);
+	    while (matcher.find()) {
+		text.add(matcher.group());
+	    }
+	}
+	System.out.println("text.size() " + text.size());
+	for (String sentence : text) {
+	    System.out.println(sentence + "\n");
 	}
     }
 

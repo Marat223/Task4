@@ -12,5 +12,5 @@ package by.mustaphin.textoperation.parse;
 public class RegularExpression {
 
     public static final String PARAGRAPH = "(\\s{4})(\\p{Upper}{1})(.+)";
-    public static final String SENTENCE = "^(\\p{Upper})+[A-Za-z,;'\"\\s]+([.?!]$)|([\\.]{3}$)";
+    public static final String SENTENCE = "\\s+[^.!?]*[.!?]|[...]";
 }
