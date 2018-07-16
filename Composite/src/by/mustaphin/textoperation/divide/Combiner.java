@@ -5,8 +5,9 @@
  */
 package by.mustaphin.textoperation.divide;
 
-import by.mustaphin.textoperation.composite.taskconcrete.LexemeLeaf;
-import by.mustaphin.textoperation.parse.LexemeDivedeHandler;
+import by.mustaphin.textoperation.composite.Component;
+import by.mustaphin.textoperation.composite.Leaf;
+import by.mustaphin.textoperation.parse.LexemeDivideHandler;
 import by.mustaphin.textoperation.parse.ParagraphDivideHandler;
 import by.mustaphin.textoperation.parse.SentenceDivideHandler;
 import by.mustaphin.textoperation.utill.TextReader;
@@ -17,15 +18,26 @@ import java.util.List;
  *
  * @author me
  */
-public class Divider {
+public class Combiner {
 
-    public void createParts() {
+    public void createPartsByList() {
 	TextReader textReader = new TextReader();
-	LexemeDivedeHandler lexemeDivedeHandler = new LexemeDivedeHandler();
+	LexemeDivideHandler lexemeDivedeHandler = new LexemeDivideHandler();
 	SentenceDivideHandler sentenceDivideHandler = new SentenceDivideHandler(lexemeDivedeHandler);
 	ParagraphDivideHandler paragraphDivideHandler = new ParagraphDivideHandler(sentenceDivideHandler);
 	paragraphDivideHandler.chain(Arrays.asList(textReader.read()));
+
 	List<String> lexeme = lexemeDivedeHandler.getText();
-	LexemeLeaf lexemeLeaf = new LexemeLeaf(lexeme.get(0));
+	Leaf lexemeLeaf = new Leaf(lexeme.get(0));
     }
+
+    public void createPartsByComponent() {
+	TextReader textReader = new TextReader();
+	Component component = new Component(textReader.read());
+	LexemeDivideHandler lexemeDivedeHandler = new LexemeDivideHandler();
+	SentenceDivideHandler sentenceDivideHandler = new SentenceDivideHandler(lexemeDivedeHandler);
+	ParagraphDivideHandler paragraphDivideHandler = new ParagraphDivideHandler(sentenceDivideHandler);
+	paragraphDivideHandler.chain(component);
+    }
+
 }

@@ -5,6 +5,7 @@
  */
 package by.mustaphin.textoperation.parse;
 
+import by.mustaphin.textoperation.composite.IComponent;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,17 @@ public class SentenceDivideHandler extends AbstractHandler {
     public void handleRequest(List<String> text) {
 	List<String> sentence = new ArrayList<>(text);
 	text.clear();
+	Pattern patternParagraph = Pattern.compile(RegularExpression.SENTENCE);
+	for (String single : sentence) {
+	    Matcher matcher = patternParagraph.matcher(single);
+	    while (matcher.find()) {
+		text.add(matcher.group());
+	    }
+	}
+    }
+
+    @Override
+    public void handleRequest(IComponent component) {
 	Pattern patternParagraph = Pattern.compile(RegularExpression.SENTENCE);
 	for (String single : sentence) {
 	    Matcher matcher = patternParagraph.matcher(single);

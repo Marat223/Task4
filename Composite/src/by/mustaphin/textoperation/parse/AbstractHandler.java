@@ -5,6 +5,7 @@
  */
 package by.mustaphin.textoperation.parse;
 
+import by.mustaphin.textoperation.composite.IComponent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,10 +32,17 @@ public abstract class AbstractHandler {
 
     public abstract void handleRequest(List<String> text);
 
+    public abstract void handleRequest(IComponent component);
+
     public void chain(List<String> text) {
 	handleRequest(text);
 	handlerText.addAll(text);
 	successor.chain(text);
+    }
+
+    public void chain(IComponent component) {
+	handleRequest(component);
+	successor.chain(component);
     }
 
     public static class DefaultHandlerRequest extends AbstractHandler {
@@ -56,5 +64,11 @@ public abstract class AbstractHandler {
 	public void chain(List<String> text) {
 	    handleRequest(text);
 	}
+
+	@Override
+	public void handleRequest(IComponent component) {
+	    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
     }
 }

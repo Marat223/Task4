@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package by.mustaphin.textoperation.composite.taskconcrete;
+package by.mustaphin.textoperation.composite;
 
-import by.mustaphin.textoperation.composite.IComponent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,17 +12,16 @@ import java.util.List;
  *
  * @author me
  */
-public class LexemeLeaf implements IComponent {
+public class Leaf implements IComponent {
 
     private List<String> text = new ArrayList<>();
 
-    public LexemeLeaf(String lexeme) {
+    public Leaf(String lexeme) {
 	text.add(lexeme);
     }
 
     @Override
-    public boolean add(IComponent component) {
-	return false;
+    public void add(IComponent component) {
     }
 
     @Override
@@ -37,7 +35,7 @@ public class LexemeLeaf implements IComponent {
     }
 
     @Override
-    public String toString() {
+    public String operate() {
 	return text.get(0);
     }
 

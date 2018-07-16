@@ -5,7 +5,7 @@
  */
 package by.mustaphin.textoperation;
 
-import by.mustaphin.textoperation.divide.Divider;
+import by.mustaphin.textoperation.divide.Combiner;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Runner {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-	Divider diveder = new Divider();
-	diveder.createParts();
+	Combiner diveder = new Combiner();
+	diveder.createPartsByComponent();
     }
 }
