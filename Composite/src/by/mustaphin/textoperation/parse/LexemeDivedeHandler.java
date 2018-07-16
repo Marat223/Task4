@@ -28,9 +28,6 @@ public class LexemeDivedeHandler extends AbstractHandler {
 		text.add(matcher.group());
 	    }
 	}
-	for (String sentence : text) {
-	    System.out.println(sentence + "\n");
-	}
     }
 
 }

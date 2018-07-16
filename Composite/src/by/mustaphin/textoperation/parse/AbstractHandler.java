@@ -13,8 +13,7 @@ import java.util.List;
  */
 public abstract class AbstractHandler {
 
-    protected List<String> text;
-    AbstractHandler successor = DefaultHandlerRequest.getHandler();
+    private AbstractHandler successor = DefaultHandlerRequest.getHandler();
 
     public AbstractHandler(AbstractHandler successor) {
 	this.successor = successor;
@@ -47,9 +46,8 @@ public abstract class AbstractHandler {
 
 	@Override
 	public void handleRequest(List<String> text) {
-	    System.out.println(">>>>DefaultHandlerRequestS");
 	    for (String string : text) {
-		System.out.println(string);
+		System.out.println(string + "\n");
 	    }
 	}
 

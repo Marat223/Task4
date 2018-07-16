@@ -5,10 +5,10 @@
  */
 package by.mustaphin.textoperation;
 
-import by.mustaphin.textoperation.utill.TextReader;
 import by.mustaphin.textoperation.parse.LexemeDivedeHandler;
 import by.mustaphin.textoperation.parse.ParagraphDivideHandler;
 import by.mustaphin.textoperation.parse.SentenceDivideHandler;
+import by.mustaphin.textoperation.utill.TextReader;
 import java.util.Arrays;
 
 /**
@@ -26,7 +26,7 @@ public class Runner {
 	SentenceDivideHandler sentenceDivideHandler = new SentenceDivideHandler(lexemeDivedeHandler);
 	ParagraphDivideHandler paragraphDivideHandler = new ParagraphDivideHandler(sentenceDivideHandler);
 	paragraphDivideHandler.chain(Arrays.asList(textReader.read()));
-//	System.out.println(textReader.read());
+	
     }
 
 }
