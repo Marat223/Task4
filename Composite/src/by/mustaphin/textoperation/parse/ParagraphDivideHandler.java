@@ -6,7 +6,6 @@
 package by.mustaphin.textoperation.parse;
 
 import by.mustaphin.textoperation.constant.RegularExpression;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,12 +19,12 @@ public class ParagraphDivideHandler extends AbstractHandler {
     public ParagraphDivideHandler(AbstractHandler successor) {
 	super(successor);
     }
-    
+
     @Override
     public void handleRequest(List<String> text) {
 	Pattern patternParagraph = Pattern.compile(RegularExpression.PARAGRAPH);
 	Matcher matcher = patternParagraph.matcher(text.get(0));
-	text = new ArrayList<>();
+	text.clear();
 	while (matcher.find()) {
 	    text.add(matcher.group());
 	}

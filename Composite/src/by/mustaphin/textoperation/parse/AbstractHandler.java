@@ -5,6 +5,7 @@
  */
 package by.mustaphin.textoperation.parse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +13,8 @@ import java.util.List;
  * @author me
  */
 public abstract class AbstractHandler {
+
+    protected List<String> handlerText = new ArrayList<>();
 
     private AbstractHandler successor = DefaultHandlerRequest.getHandler();
 
@@ -22,18 +25,19 @@ public abstract class AbstractHandler {
     public AbstractHandler() {
     }
 
-    public void setSuccessor(AbstractHandler successor) {
-	this.successor = successor;
+    public List<String> getText() {
+	return handlerText;
     }
 
     public abstract void handleRequest(List<String> text);
 
     public void chain(List<String> text) {
 	handleRequest(text);
+	handlerText.addAll(text);
 	successor.chain(text);
     }
 
-    private static class DefaultHandlerRequest extends AbstractHandler {
+    public static class DefaultHandlerRequest extends AbstractHandler {
 
 	private static DefaultHandlerRequest handler = new DefaultHandlerRequest();
 
@@ -46,13 +50,11 @@ public abstract class AbstractHandler {
 
 	@Override
 	public void handleRequest(List<String> text) {
-	    for (String string : text) {
-		System.out.println(string + "\n");
-	    }
 	}
 
 	@Override
 	public void chain(List<String> text) {
+	    handleRequest(text);
 	}
     }
 }

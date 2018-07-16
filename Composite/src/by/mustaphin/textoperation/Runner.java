@@ -9,7 +9,8 @@ import by.mustaphin.textoperation.parse.LexemeDivedeHandler;
 import by.mustaphin.textoperation.parse.ParagraphDivideHandler;
 import by.mustaphin.textoperation.parse.SentenceDivideHandler;
 import by.mustaphin.textoperation.utill.TextReader;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,8 +26,12 @@ public class Runner {
 	LexemeDivedeHandler lexemeDivedeHandler = new LexemeDivedeHandler();
 	SentenceDivideHandler sentenceDivideHandler = new SentenceDivideHandler(lexemeDivedeHandler);
 	ParagraphDivideHandler paragraphDivideHandler = new ParagraphDivideHandler(sentenceDivideHandler);
-	paragraphDivideHandler.chain(Arrays.asList(textReader.read()));
-	
+	List<String> text = new ArrayList<>();
+	text.add(textReader.read());
+	paragraphDivideHandler.chain(text);
+	List<String> resultText = lexemeDivedeHandler.getText();
+	for (String string : resultText) {
+	    System.out.println(string);
+	}
     }
-
 }

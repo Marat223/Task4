@@ -19,7 +19,7 @@ public class TextReader {
 //	final Logger LOGGER = Logger.getLogger(ReaderFile.class);
 	String text = null;
 	try {
-	    text = new String(Files.readAllBytes(Paths.get("D:\\NetBeansProjects\\Task4\\Composite\\src\\by\\mustaphin\\textoperation\\parse\\text")));
+	    text = new String(Files.readAllBytes(Paths.get("D:\\NetBeansProjects\\Task4\\Composite\\src\\by\\mustaphin\\textoperation\\utill\\text")));
 	} catch (IOException ex) {
 //	    LOGGER.log(Level.ERROR, ex);
 	}

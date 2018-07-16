@@ -20,7 +20,7 @@ public class LexemeDivedeHandler extends AbstractHandler {
     @Override
     public void handleRequest(List<String> text) {
 	List<String> lexeme = new ArrayList<>(text);
-	text = new ArrayList<>();
+	text.clear();
 	Pattern patternParagraph = Pattern.compile(RegularExpression.LEXEME);
 	for (String single : lexeme) {
 	    Matcher matcher = patternParagraph.matcher(single);

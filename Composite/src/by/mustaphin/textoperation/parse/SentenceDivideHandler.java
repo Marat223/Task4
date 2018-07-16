@@ -24,7 +24,7 @@ public class SentenceDivideHandler extends AbstractHandler {
     @Override
     public void handleRequest(List<String> text) {
 	List<String> sentence = new ArrayList<>(text);
-	text = new ArrayList<>();
+	text.clear();
 	Pattern patternParagraph = Pattern.compile(RegularExpression.SENTENCE);
 	for (String single : sentence) {
 	    Matcher matcher = patternParagraph.matcher(single);
