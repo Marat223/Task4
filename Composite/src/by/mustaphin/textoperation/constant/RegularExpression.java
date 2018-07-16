@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package by.mustaphin.textoperation.parse;
+package by.mustaphin.textoperation.constant;
 
 /**
  *

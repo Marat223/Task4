@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package by.mustaphin.textoperation.parse.chain;
+package by.mustaphin.textoperation.parse;
 
-import by.mustaphin.textoperation.parse.RegularExpression;
+import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;

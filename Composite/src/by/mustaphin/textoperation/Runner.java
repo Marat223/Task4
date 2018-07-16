@@ -5,10 +5,10 @@
  */
 package by.mustaphin.textoperation;
 
-import by.mustaphin.textoperation.parse.TextReader;
-import by.mustaphin.textoperation.parse.chain.LexemeDivedeHandler;
-import by.mustaphin.textoperation.parse.chain.ParagraphDivideHandler;
-import by.mustaphin.textoperation.parse.chain.SentenceDivideHandler;
+import by.mustaphin.textoperation.utill.TextReader;
+import by.mustaphin.textoperation.parse.LexemeDivedeHandler;
+import by.mustaphin.textoperation.parse.ParagraphDivideHandler;
+import by.mustaphin.textoperation.parse.SentenceDivideHandler;
 import java.util.Arrays;
 
 /**
