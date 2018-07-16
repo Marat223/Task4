@@ -13,4 +13,5 @@ public class RegularExpression {
 
     public static final String PARAGRAPH = "(\\s{4})(\\p{Upper}{1})(.+)";
     public static final String SENTENCE = "\\s+[^.!?]*[.!?]|[...]";
+    public static final String LITERAL = "\\w+[!?,.]*\\s+";
 }
