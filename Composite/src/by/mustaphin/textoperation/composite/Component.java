@@ -17,6 +17,7 @@ public class Component implements IComponent {
     protected List<IComponent> innerComponent = new ArrayList<>();
     private String leafData;
 
+    @Override
     public boolean isLeaf() {
 	boolean leaf = false;
 	if (innerComponent.isEmpty() || null == innerComponent) {

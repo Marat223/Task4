@@ -5,6 +5,7 @@
  */
 package by.mustaphin.textoperation.parse;
 
+import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.composite.IComponent;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.ArrayList;
@@ -38,10 +39,11 @@ public class SentenceDivideHandler extends AbstractHandler {
     @Override
     public void handleRequest(IComponent component) {
 	Pattern patternParagraph = Pattern.compile(RegularExpression.SENTENCE);
+	//TODO добраться до leaf
 	for (String single : sentence) {
-	    Matcher matcher = patternParagraph.matcher(single);
+	    Matcher matcher = patternParagraph.matcher(component.operate());
 	    while (matcher.find()) {
-		text.add(matcher.group());
+		component.add(new Component(matcher.group()));
 	    }
 	}
     }

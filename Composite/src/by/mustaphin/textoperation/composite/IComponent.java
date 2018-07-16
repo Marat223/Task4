@@ -10,6 +10,8 @@ package by.mustaphin.textoperation.composite;
  * @author me
  */
 public interface IComponent {
+    
+    boolean isLeaf();
 
     String operate();
 
