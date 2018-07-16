@@ -6,7 +6,6 @@
 package by.mustaphin.textoperation.divide;
 
 import by.mustaphin.textoperation.composite.Component;
-import by.mustaphin.textoperation.composite.Leaf;
 import by.mustaphin.textoperation.parse.LexemeDivideHandler;
 import by.mustaphin.textoperation.parse.ParagraphDivideHandler;
 import by.mustaphin.textoperation.parse.SentenceDivideHandler;
@@ -28,7 +27,7 @@ public class Combiner {
 	paragraphDivideHandler.chain(Arrays.asList(textReader.read()));
 
 	List<String> lexeme = lexemeDivedeHandler.getText();
-	Leaf lexemeLeaf = new Leaf(lexeme.get(0));
+	Component lexemeLeaf = new Component(lexeme.get(0));
     }
 
     public void createPartsByComponent() {
