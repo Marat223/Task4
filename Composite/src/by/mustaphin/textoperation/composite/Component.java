@@ -12,66 +12,38 @@ import java.util.List;
  *
  * @author me
  */
-public class Component {
+public class Component implements IComposite {
 
-    protected final List<Component> innerComponent = new ArrayList<>();
-    private String leafData;
+    protected final List<IComposite> innerComponent = new ArrayList<>();
 
-    public Component(String leafData) {
-	this.leafData = leafData;
+    public Component(String data) {
     }
 
-    public boolean isLeaf() {
-	boolean leaf = false;
-	if (innerComponent.isEmpty() || null == innerComponent) {
-	    leaf = true;
-	}
-	return leaf;
-    }
-
+    @Override
     public String operate() {
-	String data = "";
-	if (innerComponent.isEmpty()) {
-	    data = leafData;
-	} else {
-	    StringBuilder stringBuilder = new StringBuilder();
-	    for (Component component : innerComponent) {
-		stringBuilder.append(component.operate()).append(" ");
-	    }
-	    data = stringBuilder.toString();
+	StringBuilder stringBuilder = new StringBuilder();
+	for (IComposite component : innerComponent) {
+	    stringBuilder.append(component.operate()).append(" ");
 	}
-	return data;
+	return stringBuilder.toString();
     }
 
-    public void setLeafData(String leafData) {
-	this.leafData = leafData;
-    }
-
-    public void add(Component component) {
+    @Override
+    public void add(IComposite component) {
 	innerComponent.add(component);
     }
 
-    public boolean remove(Component component) {
+    @Override
+    public boolean remove(IComposite component) {
 	return innerComponent.remove(component);
     }
 
-    public Component get(int index) {
+    @Override
+    public IComposite get(int index) {
 	return innerComponent.get(index);
     }
 
-    public List<Component> giveLeafs(Component component) {
-	List<Component> leaf = new ArrayList<>();
-	if (isLeaf()) {
-	    leaf.add(this);
-	} else {
-	    for (Component inner : innerComponent) {
-		leaf.addAll(inner.giveLeafs(inner));
-	    }
-	}
-	return leaf;
-    }
-
-    public List<Component> getInnerComponent() {//TODO
+    public List<IComposite> getInnerComponent() {//TODO
 	return innerComponent;
     }
 

@@ -7,9 +7,6 @@ package by.mustaphin.textoperation.parse;
 
 import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.constant.RegularExpression;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -31,20 +28,7 @@ public class Handler {
     }
 
     public void handleRequest(Component component, String regEx) {
-	if (component.isLeaf()) {
-	    Pattern pattern = Pattern.compile(regEx);
-	    List<Component> leaf = component.giveLeafs(component);
-	    for (Component leafComponent : leaf) {
-		Matcher matcher = pattern.matcher(leafComponent.operate());
-		while (matcher.find()) {
-		    component.add(new Component(matcher.group()));
-		}
-	    }
-	} else {
-	    for (Component inner : component.getInnerComponent()) {
-		handleRequest(inner, regEx);
-	    }
-	}
+	
     }
 
     public void chain(Component component) {
