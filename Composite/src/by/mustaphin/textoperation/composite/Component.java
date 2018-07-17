@@ -16,9 +16,6 @@ public class Component implements IComposite {
 
     protected final List<IComposite> innerComponent = new ArrayList<>();
 
-    public Component(String data) {
-    }
-
     @Override
     public String operate() {
 	StringBuilder stringBuilder = new StringBuilder();

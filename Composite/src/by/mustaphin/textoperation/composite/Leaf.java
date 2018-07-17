@@ -11,6 +11,8 @@ package by.mustaphin.textoperation.composite;
  */
 public class Leaf implements IComposite {
 
+    private String data;
+
     @Override
     public String operate() {
 	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
