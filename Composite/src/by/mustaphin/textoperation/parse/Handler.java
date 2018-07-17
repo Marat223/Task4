@@ -6,6 +6,7 @@
 package by.mustaphin.textoperation.parse;
 
 import by.mustaphin.textoperation.composite.Component;
+import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -53,7 +54,7 @@ public class Handler {
 
     public static class DefaultHandlerRequest extends Handler {
 
-	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(null);
+	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);
 
 	public static DefaultHandlerRequest getHandler() {
 	    return handler;
@@ -70,7 +71,7 @@ public class Handler {
 
 	@Override
 	public void handleRequest(Component component, String regEx) {
-	    //TODO DefaultHandlerRequest handleRequest()
+	    System.out.println(component.operate());
 	}
 
     }
