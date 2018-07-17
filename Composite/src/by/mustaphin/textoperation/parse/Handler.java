@@ -7,7 +7,6 @@ package by.mustaphin.textoperation.parse;
 
 import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.composite.IComponent;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,25 +15,20 @@ import java.util.regex.Pattern;
  *
  * @author me
  */
-public abstract class AbstractHandler {
+public class Handler {
 
-    protected List<String> handlerText = new ArrayList<>();
-
-    private AbstractHandler successor = DefaultHandlerRequest.getHandler();
+    private Handler successor;
     protected String regularExpression;
 
-    public AbstractHandler(AbstractHandler successor) {
+    public Handler(Handler successor, String regExp) {
 	this.successor = successor;
+	regularExpression = regExp;
     }
 
-    public AbstractHandler() {
+    public Handler(String regExp) {
+	this.successor = DefaultHandlerRequest.getHandler();
+	regularExpression = regExp;
     }
-
-    public List<String> getText() {
-	return handlerText;
-    }
-
-    public abstract void handleRequest(List<String> text);
 
     public void handleRequest(IComponent component, String regEx) {
 	Pattern pattern = Pattern.compile(regEx);
@@ -47,35 +41,26 @@ public abstract class AbstractHandler {
 	}
     }
 
-    public void chain(List<String> text) {
-	handleRequest(text);
-	handlerText.addAll(text);
-	successor.chain(text);
-    }
-
     public void chain(IComponent component) {
 	handleRequest(component, regularExpression);
 	successor.chain(component);
     }
 
-    public static class DefaultHandlerRequest extends AbstractHandler {
+    public static class DefaultHandlerRequest extends Handler {
 
-	private static DefaultHandlerRequest handler = new DefaultHandlerRequest();
+	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(null);
 
 	public static DefaultHandlerRequest getHandler() {
 	    return handler;
 	}
 
-	private DefaultHandlerRequest() {
+	public DefaultHandlerRequest(String regExp) {
+	    super(regExp);
 	}
 
 	@Override
-	public void handleRequest(List<String> text) {
-	}
-
-	@Override
-	public void chain(List<String> text) {
-	    handleRequest(text);
+	public void chain(IComponent component) {
+	    handleRequest(component, regularExpression);
 	}
 
 	@Override
