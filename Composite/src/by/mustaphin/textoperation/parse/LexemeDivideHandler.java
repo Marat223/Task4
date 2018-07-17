@@ -5,7 +5,6 @@
  */
 package by.mustaphin.textoperation.parse;
 
-import by.mustaphin.textoperation.composite.IComponent;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +17,10 @@ import java.util.regex.Pattern;
  */
 public class LexemeDivideHandler extends AbstractHandler {
 
+    public LexemeDivideHandler() {
+	regularExpression = RegularExpression.LEXEME;
+    }
+
     @Override
     public void handleRequest(List<String> text) {
 	List<String> lexeme = new ArrayList<>(text);
@@ -29,11 +32,6 @@ public class LexemeDivideHandler extends AbstractHandler {
 		text.add(matcher.group());
 	    }
 	}
-    }
-
-    @Override
-    public void handleRequest(IComponent component) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

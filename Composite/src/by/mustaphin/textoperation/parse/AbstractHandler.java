@@ -5,9 +5,12 @@
  */
 package by.mustaphin.textoperation.parse;
 
+import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.composite.IComponent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -18,6 +21,7 @@ public abstract class AbstractHandler {
     protected List<String> handlerText = new ArrayList<>();
 
     private AbstractHandler successor = DefaultHandlerRequest.getHandler();
+    protected String regularExpression;
 
     public AbstractHandler(AbstractHandler successor) {
 	this.successor = successor;
@@ -32,7 +36,16 @@ public abstract class AbstractHandler {
 
     public abstract void handleRequest(List<String> text);
 
-    public abstract void handleRequest(IComponent component);
+    public void handleRequest(IComponent component, String regEx) {
+	Pattern pattern = Pattern.compile(regEx);
+	List<IComponent> leaf = component.giveLeafs(component);
+	for (IComponent leafComponent : leaf) {
+	    Matcher matcher = pattern.matcher(leafComponent.operate());
+	    while (matcher.find()) {
+		component.add(new Component(matcher.group()));
+	    }
+	}
+    }
 
     public void chain(List<String> text) {
 	handleRequest(text);
@@ -41,7 +54,7 @@ public abstract class AbstractHandler {
     }
 
     public void chain(IComponent component) {
-	handleRequest(component);
+	handleRequest(component, regularExpression);
 	successor.chain(component);
     }
 
@@ -66,8 +79,8 @@ public abstract class AbstractHandler {
 	}
 
 	@Override
-	public void handleRequest(IComponent component) {
-	    throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public void handleRequest(IComponent component, String regEx) {
+	    //TODO DefaultHandlerRequest handleRequest()
 	}
 
     }

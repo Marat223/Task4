@@ -5,12 +5,14 @@
  */
 package by.mustaphin.textoperation.composite;
 
+import java.util.List;
+
 /**
  *
  * @author me
  */
 public interface IComponent {
-    
+
     boolean isLeaf();
 
     String operate();
@@ -20,4 +22,6 @@ public interface IComponent {
     boolean remove(IComponent component);
 
     IComponent get(int index);
+
+    public List<IComponent> giveLeafs(IComponent component);
 }

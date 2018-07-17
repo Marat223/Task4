@@ -74,4 +74,17 @@ public class Component implements IComponent {
 	return innerComponent.get(index);
     }
 
+    @Override
+    public List<IComponent> giveLeafs(IComponent component) {
+	List<IComponent> leaf = new ArrayList<>();
+	if (isLeaf()) {
+	    leaf.add(this);
+	} else {
+	    for (IComponent inner : innerComponent) {
+		leaf.addAll(inner.giveLeafs(inner));
+	    }
+	}
+	return leaf;
+    }
+
 }

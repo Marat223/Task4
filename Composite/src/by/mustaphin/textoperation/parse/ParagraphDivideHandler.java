@@ -5,8 +5,6 @@
  */
 package by.mustaphin.textoperation.parse;
 
-import by.mustaphin.textoperation.composite.Component;
-import by.mustaphin.textoperation.composite.IComponent;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -20,6 +18,7 @@ public class ParagraphDivideHandler extends AbstractHandler {
 
     public ParagraphDivideHandler(AbstractHandler successor) {
 	super(successor);
+	regularExpression = RegularExpression.PARAGRAPH;
     }
 
     @Override
@@ -29,15 +28,6 @@ public class ParagraphDivideHandler extends AbstractHandler {
 	text.clear();
 	while (matcher.find()) {
 	    text.add(matcher.group());
-	}
-    }
-
-    @Override
-    public void handleRequest(IComponent component) {
-	Pattern patternParagraph = Pattern.compile(RegularExpression.PARAGRAPH);
-	Matcher matcher = patternParagraph.matcher(component.operate());
-	while (matcher.find()) {
-	    component.add(new Component(matcher.group()));
 	}
     }
 
