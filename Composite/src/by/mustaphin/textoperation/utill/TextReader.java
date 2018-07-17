@@ -20,6 +20,7 @@ public class TextReader {
 	try {//TODO make relative path
 	    text = new String(Files.readAllBytes(Paths.get("D:\\NetBeansProjects\\Task4\\Composite\\src\\by\\mustaphin\\textoperation\\utill\\text")));
 	} catch (IOException ex) {
+	    ex.printStackTrace();
 	}
 	return text;
     }
