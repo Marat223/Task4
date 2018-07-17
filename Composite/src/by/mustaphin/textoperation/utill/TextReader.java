@@ -16,12 +16,10 @@ import java.nio.file.Paths;
 public class TextReader {
 
     public String read() {
-//	final Logger LOGGER = Logger.getLogger(ReaderFile.class);
 	String text = null;
-	try {
+	try {//TODO make relative path
 	    text = new String(Files.readAllBytes(Paths.get("D:\\NetBeansProjects\\Task4\\Composite\\src\\by\\mustaphin\\textoperation\\utill\\text")));
 	} catch (IOException ex) {
-//	    LOGGER.log(Level.ERROR, ex);
 	}
 	return text;
     }
