@@ -5,10 +5,10 @@
  */
 package by.mustaphin.textoperation.divide;
 
-import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import by.mustaphin.textoperation.parse.Handler;
 import by.mustaphin.textoperation.utill.TextReader;
+import java.util.Arrays;
 
 /**
  *
@@ -17,12 +17,11 @@ import by.mustaphin.textoperation.utill.TextReader;
 public class Combiner {
 
     public void createPartsByComponent() {
-	TextReader textReader = new TextReader();
-	Component component = new Component(textReader.read());
 	Handler lexemeDivedeHandler = new Handler(RegularExpression.LEXEME);
 	Handler sentenceDivideHandler = new Handler(lexemeDivedeHandler, RegularExpression.SENTENCE);
 	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, RegularExpression.PARAGRAPH);
-	paragraphDivideHandler.chain(component);
+	TextReader textReader = new TextReader();
+	paragraphDivideHandler.chain(Arrays.asList(textReader.read()));
     }
 
 }

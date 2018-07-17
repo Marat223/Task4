@@ -5,8 +5,8 @@
  */
 package by.mustaphin.textoperation.parse;
 
-import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.constant.RegularExpression;
+import java.util.List;
 
 /**
  *
@@ -27,18 +27,18 @@ public class Handler {
 	regularExpression = regExp;
     }
 
-    public void handleRequest(Component component, String regEx) {
-	
+    public void handleRequest(List<String> data, String regEx) {
+
     }
 
-    public void chain(Component component) {
-	handleRequest(component, regularExpression);
-	successor.chain(component);
+    public void chain(List<String> data) {
+	handleRequest(data, regularExpression);
+	successor.chain(data);
     }
 
     public static class DefaultHandlerRequest extends Handler {
 
-	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);
+	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);//TODO
 
 	public static DefaultHandlerRequest getHandler() {
 	    return handler;
@@ -49,13 +49,13 @@ public class Handler {
 	}
 
 	@Override
-	public void chain(Component component) {
-	    handleRequest(component, regularExpression);
+	public void chain(List<String> data) {
+	    handleRequest(data, regularExpression);
 	}
 
 	@Override
-	public void handleRequest(Component component, String regEx) {
-	    System.out.println(component.operate());
+	public void handleRequest(List<String> data, String regEx) {
+	    System.out.println(data);
 	}
 
     }
