@@ -6,7 +6,6 @@
 package by.mustaphin.textoperation.parse;
 
 import by.mustaphin.textoperation.composite.Component;
-import by.mustaphin.textoperation.composite.IComponent;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,18 +29,24 @@ public class Handler {
 	regularExpression = regExp;
     }
 
-    public void handleRequest(IComponent component, String regEx) {
-	Pattern pattern = Pattern.compile(regEx);
-	List<IComponent> leaf = component.giveLeafs(component);
-	for (IComponent leafComponent : leaf) {
-	    Matcher matcher = pattern.matcher(leafComponent.operate());
-	    while (matcher.find()) {
-		component.add(new Component(matcher.group()));
+    public void handleRequest(Component component, String regEx) {
+	if (component.isLeaf()) {
+	    Pattern pattern = Pattern.compile(regEx);
+	    List<Component> leaf = component.giveLeafs(component);
+	    for (Component leafComponent : leaf) {
+		Matcher matcher = pattern.matcher(leafComponent.operate());
+		while (matcher.find()) {
+		    component.add(new Component(matcher.group()));
+		}
+	    }
+	} else {
+	    for (Component inner : component.getInnerComponent()) {
+		handleRequest(inner, regEx);
 	    }
 	}
     }
 
-    public void chain(IComponent component) {
+    public void chain(Component component) {
 	handleRequest(component, regularExpression);
 	successor.chain(component);
     }
@@ -59,12 +64,12 @@ public class Handler {
 	}
 
 	@Override
-	public void chain(IComponent component) {
+	public void chain(Component component) {
 	    handleRequest(component, regularExpression);
 	}
 
 	@Override
-	public void handleRequest(IComponent component, String regEx) {
+	public void handleRequest(Component component, String regEx) {
 	    //TODO DefaultHandlerRequest handleRequest()
 	}
 

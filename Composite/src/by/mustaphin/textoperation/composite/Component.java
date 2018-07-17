@@ -12,12 +12,15 @@ import java.util.List;
  *
  * @author me
  */
-public class Component implements IComponent {
+public class Component {
 
-    protected List<IComponent> innerComponent = new ArrayList<>();
+    protected final List<Component> innerComponent = new ArrayList<>();
     private String leafData;
 
-    @Override
+    public Component(String leafData) {
+	this.leafData = leafData;
+    }
+
     public boolean isLeaf() {
 	boolean leaf = false;
 	if (innerComponent.isEmpty() || null == innerComponent) {
@@ -26,22 +29,13 @@ public class Component implements IComponent {
 	return leaf;
     }
 
-    public Component(String leafData) {
-	this.leafData = leafData;
-    }
-
-    public void setComponents(List<IComponent> component) {
-	innerComponent = component;
-    }
-
-    @Override
     public String operate() {
 	String data = "";
 	if (innerComponent.isEmpty()) {
 	    data = leafData;
-	} else if (!innerComponent.isEmpty()) {
+	} else {
 	    StringBuilder stringBuilder = new StringBuilder();
-	    for (IComponent component : innerComponent) {
+	    for (Component component : innerComponent) {
 		stringBuilder.append(component.operate()).append(" ");
 	    }
 	    data = stringBuilder.toString();
@@ -53,38 +47,32 @@ public class Component implements IComponent {
 	this.leafData = leafData;
     }
 
-    @Override
-    public void add(IComponent component) {
+    public void add(Component component) {
 	innerComponent.add(component);
     }
 
-    @Override
-    public boolean remove(IComponent component) {
-	boolean success = false;
-	int size = innerComponent.size();
-	innerComponent.remove(component);
-	if (innerComponent.size() != size) {
-	    success = true;
-	}
-	return success;
+    public boolean remove(Component component) {
+	return innerComponent.remove(component);
     }
 
-    @Override
-    public IComponent get(int index) {
+    public Component get(int index) {
 	return innerComponent.get(index);
     }
 
-    @Override
-    public List<IComponent> giveLeafs(IComponent component) {
-	List<IComponent> leaf = new ArrayList<>();
+    public List<Component> giveLeafs(Component component) {
+	List<Component> leaf = new ArrayList<>();
 	if (isLeaf()) {
 	    leaf.add(this);
 	} else {
-	    for (IComponent inner : innerComponent) {
+	    for (Component inner : innerComponent) {
 		leaf.addAll(inner.giveLeafs(inner));
 	    }
 	}
 	return leaf;
+    }
+
+    public List<Component> getInnerComponent() {//TODO
+	return innerComponent;
     }
 
 }
