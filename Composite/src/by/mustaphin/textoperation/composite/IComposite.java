@@ -21,6 +21,6 @@ public interface IComposite {
 
     public IComposite get(int index);
 
-    public List<IComposite> getComponent();
+    public List<IComposite> getData();
 
 }

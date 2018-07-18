@@ -41,7 +41,7 @@ public class Component implements IComposite {
     }
 
     @Override
-    public List<IComposite> getComponent() {//TODO
+    public List<IComposite> getData() {//TODO
 	return innerComponent;
     }
 

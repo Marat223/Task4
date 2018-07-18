@@ -5,8 +5,12 @@
  */
 package by.mustaphin.textoperation.divide;
 
+import by.mustaphin.textoperation.composite.Component;
+import by.mustaphin.textoperation.composite.IComposite;
+import by.mustaphin.textoperation.composite.Leaf;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,11 +30,36 @@ public class DivideHandler {
     }
 
     public DivideHandler(String regExp) {
-	this.successor = DefaultHandlerRequest.getHandler();
+//	this.successor = DefaultHandlerRequest.getHandler();
 	regularExpression = regExp;
     }
 
-    public void handleRequest(ArrayList<String> data, String regEx) {
+    public void handleRequest(ArrayList<String> data, IComposite component) {//TODO предполагаем, что на входе сложный текст
+	parse(data, regularExpression);
+	List<IComposite> components = findComponents(component);//TODO
+	int index = 0;
+	Iterator<String> dataIterator = data.iterator();
+	while (dataIterator.hasNext()) {
+	    Leaf leaf = findLeaf(dataIterator.next(), RegularExpression.LEXEME);
+	    if (null != leaf) {
+		components.get(index).add(leaf);
+		dataIterator.remove();
+	    } else {
+		components.get(index).add(new Component());
+		index++;
+	    }
+	}
+    }
+
+    private List<IComposite> findComponents(IComposite component) {//TODO сделать метод поиска сложных компонентов
+	List<IComposite> subComponent = component.getData();
+	for (IComposite innerComponent : subComponent) {
+	    
+	}
+	return subComponent;
+    }
+
+    private void parse(ArrayList<String> data, String regEx) {
 	List<String> handled = new ArrayList<>();
 	Pattern pattern = Pattern.compile(regEx);
 	for (String string : data) {
@@ -43,35 +72,44 @@ public class DivideHandler {
 	data.addAll(handled);
     }
 
-    public void chain(ArrayList<String> data) {
-	handleRequest(data, regularExpression);
-	successor.chain(data);
+    private Leaf findLeaf(String data, String leafRegExp) {
+	Leaf leaf = null;
+	Pattern pattern = Pattern.compile(leafRegExp);
+	Matcher matcher = pattern.matcher(data);
+	if (matcher.find()) {
+	    leaf = new Leaf(data);
+	}
+	return leaf;
     }
 
-    public static class DefaultHandlerRequest extends DivideHandler {
-
-	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);
-
-	public static DefaultHandlerRequest getHandler() {
-	    return handler;
-	}
-
-	public DefaultHandlerRequest(String regExp) {
-	    super(regExp);
-	}
-
-	@Override
-	public void chain(ArrayList<String> data) {
-	    handleRequest(data, regularExpression);
-	}
-
-	@Override
-	public void handleRequest(ArrayList<String> data, String regEx) {
-	    for (String string : data) {
-		System.out.println(string);
-	    }
-	}
-
+    public void chain(ArrayList<String> data, IComposite component) {
+	handleRequest(data, component);
+	successor.chain(data, component);
     }
 
+//    public static class DefaultHandlerRequest extends DivideHandler {
+//
+//	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);
+//
+//	public static DefaultHandlerRequest getHandler() {
+//	    return handler;
+//	}
+//
+//	public DefaultHandlerRequest(String regExp) {
+//	    super(regExp);
+//	}
+//
+//	@Override
+//	public void chain(ArrayList<String> data, Component component) {
+//	    handleRequest(data, null);
+//	}
+//
+//	@Override
+//	public void handleRequest(ArrayList<String> data, Component component) {
+//	    for (String string : data) {
+//		System.out.println(string);
+//	    }
+//	}
+//
+//    }
 }

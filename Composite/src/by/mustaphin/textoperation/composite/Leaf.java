@@ -41,7 +41,7 @@ public class Leaf implements IComposite {
     }
 
     @Override
-    public List<IComposite> getComponent() {
+    public List<IComposite> getData() {
 	return Arrays.asList(this);
     }
 
