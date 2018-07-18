@@ -26,7 +26,9 @@ public class AssemblyHandler {
     }
 
     public void handleRequest(List<IComposite> component) {
-	
+	for (IComposite iComposite : component) {
+	    
+	}
     }
 
     public void startHandling(List<String> data) {

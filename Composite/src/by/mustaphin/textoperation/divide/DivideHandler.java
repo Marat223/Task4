@@ -31,15 +31,21 @@ public class DivideHandler {
     }
 
     public void handleRequest(ArrayList<String> data, String regEx) {
+	System.out.println(data.size() + " DATA SIZE BEFORE ");
 	List<String> handled = new ArrayList<>(data);
 	Pattern pattern = Pattern.compile(regEx);
-	data = new ArrayList<>();
-	for (String string : handled) {
+	for (String string : data) {
 	    Matcher matcher = pattern.matcher(string);
 	    while (matcher.matches()) {
-		data.add(matcher.group());
+		handled.add(matcher.group());
 	    }
 	}
+	data.clear();
+	data.addAll(handled);
+	for (String string : handled) {
+	    System.out.println(string + " ");
+	}
+	System.out.println(data.size() + " DATA SIZE AFTER ");
     }
 
     public void chain(ArrayList<String> data) {
@@ -67,7 +73,7 @@ public class DivideHandler {
 	@Override
 	public void handleRequest(ArrayList<String> data, String regEx) {
 	    for (String string : data) {
-		System.out.println(string + " ");
+//		System.out.println(string);
 	    }
 	}
 
