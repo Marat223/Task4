@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package by.mustaphin.textoperation.parse;
+package by.mustaphin.textoperation.divide;
 
 import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.ArrayList;
@@ -15,17 +15,17 @@ import java.util.regex.Pattern;
  *
  * @author me
  */
-public class Handler {
+public class DivideHandler {
 
-    private Handler successor;
+    private DivideHandler successor;
     protected String regularExpression;
 
-    public Handler(Handler successor, String regExp) {
+    public DivideHandler(DivideHandler successor, String regExp) {
 	this.successor = successor;
 	regularExpression = regExp;
     }
 
-    public Handler(String regExp) {
+    public DivideHandler(String regExp) {
 	this.successor = DefaultHandlerRequest.getHandler();
 	regularExpression = regExp;
     }
@@ -40,7 +40,6 @@ public class Handler {
 		data.add(matcher.group());
 	    }
 	}
-
     }
 
     public void chain(ArrayList<String> data) {
@@ -48,7 +47,7 @@ public class Handler {
 	successor.chain(data);
     }
 
-    public static class DefaultHandlerRequest extends Handler {
+    public static class DefaultHandlerRequest extends DivideHandler {
 
 	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);//TODO
 
@@ -73,4 +72,5 @@ public class Handler {
 	}
 
     }
+
 }

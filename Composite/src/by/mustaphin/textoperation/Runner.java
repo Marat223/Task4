@@ -5,7 +5,11 @@
  */
 package by.mustaphin.textoperation;
 
-import by.mustaphin.textoperation.divide.Combiner;
+import by.mustaphin.textoperation.constant.RegularExpression;
+import by.mustaphin.textoperation.divide.DivideHandler;
+import by.mustaphin.textoperation.utill.TextReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -17,7 +21,10 @@ public class Runner {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-	Combiner diveder = new Combiner();
-	diveder.createPartsByComponent();
+	DivideHandler lexemeDivedeHandler = new DivideHandler(RegularExpression.LEXEME);
+	DivideHandler sentenceDivideHandler = new DivideHandler(lexemeDivedeHandler, RegularExpression.SENTENCE);
+	DivideHandler paragraphDivideHandler = new DivideHandler(sentenceDivideHandler, RegularExpression.PARAGRAPH);
+	TextReader textReader = new TextReader();
+	paragraphDivideHandler.chain(new ArrayList<>(Arrays.asList(textReader.read())));
     }
 }

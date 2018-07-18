@@ -13,24 +13,27 @@ public class Leaf implements IComposite {
 
     private String data;
 
+    public Leaf(String data) {
+	this.data = data;
+    }
+
     @Override
     public String operate() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	return data;
     }
 
     @Override
     public void add(IComposite component) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean remove(IComposite component) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	return false;
     }
 
     @Override
     public IComposite get(int index) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	return this;
     }
 
 }
