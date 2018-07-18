@@ -8,7 +8,7 @@ package by.mustaphin.textoperation;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import by.mustaphin.textoperation.divide.DivideHandler;
 import by.mustaphin.textoperation.utill.TextReader;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  *
@@ -23,7 +23,9 @@ public class Runner {
 	DivideHandler lexemeDivedeHandler = new DivideHandler(RegularExpression.LEXEME);
 	DivideHandler sentenceDivideHandler = new DivideHandler(lexemeDivedeHandler, RegularExpression.SENTENCE);
 	DivideHandler paragraphDivideHandler = new DivideHandler(sentenceDivideHandler, RegularExpression.PARAGRAPH);
-	paragraphDivideHandler.chain(Arrays.asList(new TextReader().read()));
+	ArrayList<String> data = new ArrayList<>();
+	data.add(new TextReader().read());
+	paragraphDivideHandler.chain(data);
     }
 
 }

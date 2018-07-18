@@ -11,8 +11,8 @@ package by.mustaphin.textoperation.constant;
  */
 public class RegularExpression {
 
-    public static final String PARAGRAPH = "(\\s{4})(\\p{Upper}{1})(.+)";
-    public static final String SENTENCE = "\\s+[^.!?]*[.!?]|[...]";
+    public static final String PARAGRAPH = "\\p{Blank}{4}.+\\s{1}";
+    public static final String SENTENCE = "\\s+[^.!?]*[.!?]{1,3}";
     public static final String LEXEME = "\\w+[!?,.]*|[...]\\p{Blank}+";
     public static final String EMPTY = "";
 }
