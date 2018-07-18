@@ -18,39 +18,29 @@ public class AssemblyHandler {
 
     private AssemblyHandler successor;
 
-    protected AssemblyHandler() {
+    public AssemblyHandler() {
     }
 
     public AssemblyHandler(AssemblyHandler successor) {
 	this.successor = successor;
     }
 
-    public void combine(List<String> data) {
-	createLeafs(data);
+    public void handleRequest(List<IComposite> component) {
+	
     }
 
-    private List<IComposite> createLeafs(List<String> data) {
+    public void startHandling(List<String> data) {
 	List<IComposite> leafList = new ArrayList<>();
 	for (String string : data) {
 	    Leaf leaf = new Leaf(string);
 	    leafList.add(leaf);
 	}
-	return leafList;
+	chain(leafList);
     }
 
-    private IComposite createComponent(List<Leaf> leaf) {
-	for (Leaf componentPart : leaf) {
-
-	}
-	return null;
-    }
-
-    public void handleRequest(ArrayList<String> data) {
-    }
-
-    public void chain(ArrayList<String> data) {
-	handleRequest(data);
-	successor.chain(data);
+    public void chain(List<IComposite> component) {
+	handleRequest(component);
+	successor.chain(component);
     }
 
     public static class DefaultHandlerRequest extends AssemblyHandler {
@@ -61,17 +51,16 @@ public class AssemblyHandler {
 	    return handler;
 	}
 
-	public DefaultHandlerRequest(AssemblyHandler successor) {
-	    super(successor);
+	public DefaultHandlerRequest() {
 	}
 
 	@Override
-	public void chain(ArrayList<String> data) {
+	public void chain(List<IComposite> data) {
 	    handleRequest(data);
 	}
 
 	@Override
-	public void handleRequest(ArrayList<String> data) {
+	public void handleRequest(List<IComposite> data) {
 	}
 
     }

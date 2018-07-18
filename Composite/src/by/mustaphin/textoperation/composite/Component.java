@@ -26,8 +26,8 @@ public class Component implements IComposite {
     }
 
     @Override
-    public void add(IComposite component) {
-	innerComponent.add(component);
+    public boolean add(IComposite component) {
+	return innerComponent.add(component);
     }
 
     @Override
@@ -40,7 +40,8 @@ public class Component implements IComposite {
 	return innerComponent.get(index);
     }
 
-    public List<IComposite> getInnerComponent() {//TODO
+    @Override
+    public List<IComposite> getComponent() {//TODO
 	return innerComponent;
     }
 
