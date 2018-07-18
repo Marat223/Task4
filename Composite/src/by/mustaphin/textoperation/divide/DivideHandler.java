@@ -52,11 +52,24 @@ public class DivideHandler {
     }
 
     private List<IComposite> findComponents(IComposite component) {//TODO сделать метод поиска сложных компонентов
-	List<IComposite> subComponent = component.getData();
-	for (IComposite innerComponent : subComponent) {
+	List<IComposite> innerComponent = new ArrayList<>();
+	for (IComposite paragraphComponent : component.getData()) {
 	    
 	}
-	return subComponent;
+	return innerComponent;
+    }
+
+    private List<IComposite> findComponents(List<IComposite> component) {
+	List<IComposite> innerComponent = new ArrayList<>();
+	for (IComposite subComponent : component) {
+	    if (null != subComponent.getData()) {
+		innerComponent.add(subComponent);
+	    }
+	}
+	for (IComposite subComponent : innerComponent) {
+	    
+	}
+	return innerComponent;
     }
 
     private void parse(ArrayList<String> data, String regEx) {
@@ -87,29 +100,30 @@ public class DivideHandler {
 	successor.chain(data, component);
     }
 
-//    public static class DefaultHandlerRequest extends DivideHandler {
-//
-//	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);
-//
-//	public static DefaultHandlerRequest getHandler() {
-//	    return handler;
-//	}
-//
-//	public DefaultHandlerRequest(String regExp) {
-//	    super(regExp);
-//	}
-//
-//	@Override
-//	public void chain(ArrayList<String> data, Component component) {
-//	    handleRequest(data, null);
-//	}
-//
-//	@Override
-//	public void handleRequest(ArrayList<String> data, Component component) {
-//	    for (String string : data) {
-//		System.out.println(string);
-//	    }
-//	}
-//
-//    }
+    public static class DefaultHandlerRequest extends DivideHandler {
+
+	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);
+
+	public static DefaultHandlerRequest getHandler() {
+	    return handler;
+	}
+
+	public DefaultHandlerRequest(String regExp) {
+	    super(regExp);
+	}
+
+	@Override
+	public void chain(ArrayList<String> data, IComposite component) {
+	    handleRequest(data, null);
+	}
+
+	@Override
+	public void handleRequest(ArrayList<String> data, IComposite component) {
+	    for (String string : data) {
+		System.out.println(string);
+	    }
+	}
+
+    }
+
 }

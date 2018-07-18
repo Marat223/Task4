@@ -5,7 +5,6 @@
  */
 package by.mustaphin.textoperation.composite;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -42,7 +41,7 @@ public class Leaf implements IComposite {
 
     @Override
     public List<IComposite> getData() {
-	return Arrays.asList(this);
+	return null;
     }
 
 }
