@@ -42,7 +42,7 @@ public class Handler {
 	    Matcher matcher = pattern.matcher(string);
 	    while (matcher.find()) {
 		String text = matcher.group();
-		Leaf leaf = findLeaf(text, RegularExpression.LEXEME);
+		Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME);
 		if (null != leaf) {
 		    components.get(index).add(leaf);
 		} else {
@@ -56,7 +56,7 @@ public class Handler {
 	data.addAll(handled);
     }
 
-    private List<IComposite> findComponents(IComposite component) {
+    protected List<IComposite> findComponents(IComposite component) {
 	List<IComposite> innerComponent = new ArrayList<>();
 	if (component.getData().isEmpty()) {
 	    innerComponent.add(component);
@@ -80,7 +80,7 @@ public class Handler {
 	return innerComponent;
     }
 
-    private Leaf findLeaf(String data, String leafRegExp) {
+    protected Leaf findLeaf(String data, String leafRegExp) {
 	Leaf leaf = null;
 	Pattern pattern = Pattern.compile(leafRegExp);
 	Matcher matcher = pattern.matcher(data);
@@ -103,17 +103,27 @@ public class Handler {
 	    return handler;
 	}
 
-	public DefaultHandlerRequest(String regExp) {
+	private DefaultHandlerRequest(String regExp) {
 	    super(regExp);
 	}
 
 	@Override
-	public void chain(ArrayList<String> data, IComposite component) {
-	    handleRequest(data, null);
+	public void handleRequest(ArrayList<String> data, IComposite component) {
+	    Pattern pattern = Pattern.compile(regularExpression);
+	    List<IComposite> components = findComponents(component);
+	    int index = 0;
+	    for (String string : data) {
+		Matcher matcher = pattern.matcher(string);
+		while (matcher.find()) {
+		    components.get(index).add(new Leaf(matcher.group()));
+		}
+		index++;
+	    }
 	}
 
 	@Override
-	public void handleRequest(ArrayList<String> data, IComposite component) {
+	protected List<IComposite> findComponents(IComposite component) {
+	    return super.findComponents(component); //To change body of generated methods, choose Tools | Templates.
 	}
 
     }

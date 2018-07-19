@@ -21,8 +21,8 @@ public class Runner {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//	Handler lexemeDivedeHandler = new Handler(RegularExpression.LEXEME);
-	Handler sentenceDivideHandler = new Handler(RegularExpression.SENTENCE);
+	Handler lexemeDivedeHandler = new Handler(RegularExpression.LEXEME);
+	Handler sentenceDivideHandler = new Handler(lexemeDivedeHandler, RegularExpression.SENTENCE);
 	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, RegularExpression.PARAGRAPH);
 	ArrayList<String> data = new ArrayList<>();
 	data.add(new TextReader().read());
