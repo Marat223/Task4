@@ -17,11 +17,12 @@ public class TextReader {
 
     public String read() {
 	String text = null;
-	try {//TODO make relative path
-	    text = new String(Files.readAllBytes(Paths.get("D:\\NetBeansProjects\\Task4\\Composite\\src\\by\\mustaphin\\textoperation\\utill\\text")));
+	try {
+	    text = new String(Files.readAllBytes(Paths.get("resources/text")));
 	} catch (IOException ex) {
 	    ex.printStackTrace();
 	}
 	return text;
     }
+
 }
