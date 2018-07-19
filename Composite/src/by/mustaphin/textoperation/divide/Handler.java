@@ -5,6 +5,7 @@
  */
 package by.mustaphin.textoperation.divide;
 
+import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.composite.Composite;
 import by.mustaphin.textoperation.composite.Leaf;
 import by.mustaphin.textoperation.constant.RegularExpression;
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import by.mustaphin.textoperation.composite.Component;
 
 /**
  *
@@ -56,7 +56,7 @@ public class Handler {
 	data.addAll(handled);
     }
 
-    protected List<Component> findComponents(Component component) {
+    protected List<Component> findComponents(Component component) {//TODO сделать рекурсвный метод
 	List<Component> innerComponent = new ArrayList<>();
 	if (component.getData().isEmpty()) {
 	    innerComponent.add(component);
@@ -118,8 +118,8 @@ public class Handler {
 	}
 
 	@Override
-	protected List<Component> findComponents(Component component) {
-	    return super.findComponents(component);
+	public void chain(ArrayList<String> data, Component component) {
+	    handleRequest(data, component);
 	}
 
     }
