@@ -114,9 +114,6 @@ public class Handler {
 
 	@Override
 	public void handleRequest(ArrayList<String> data, IComposite component) {
-	    for (String string : data) {
-		System.out.println(string);
-	    }
 	}
 
     }
