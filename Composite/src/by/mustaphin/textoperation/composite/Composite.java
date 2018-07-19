@@ -5,43 +5,44 @@
  */
 package by.mustaphin.textoperation.composite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author marat
+ * @author me
  */
-public class Leaf implements Component {
+public class Composite implements Component {
 
-    private String data;
-
-    public Leaf(String data) {
-	this.data = data;
-    }
+    protected final List<Component> innerComponent = new ArrayList<>();
 
     @Override
     public String operate() {
-	return data;
+	StringBuilder stringBuilder = new StringBuilder();
+	for (Component component : innerComponent) {
+	    stringBuilder.append(component.operate()).append(" ");
+	}
+	return stringBuilder.toString();
     }
 
     @Override
     public boolean add(Component component) {
-	return false;
+	return innerComponent.add(component);
     }
 
     @Override
     public boolean remove(Component component) {
-	return false;
+	return innerComponent.remove(component);
     }
 
     @Override
     public Component get(int index) {
-	return this;
+	return innerComponent.get(index);
     }
 
     @Override
-    public List<Component> getData() {
-	return null;
+    public List<Component> getData() {//TODO
+	return innerComponent;
     }
 
 }

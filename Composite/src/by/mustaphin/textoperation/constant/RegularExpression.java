@@ -11,9 +11,13 @@ package by.mustaphin.textoperation.constant;
  */
 public class RegularExpression {
 
+    private RegularExpression() {
+    }
+
     public static final String PARAGRAPH = "\\p{Blank}{4}.+\\s{1}";
     public static final String SENTENCE = "\\s+[^.!?]*[.!?]{1,3}";
     public static final String LEXEME = "\\w+[!?,.]*|[...]\\p{Blank}+";
     public static final String SINGLE_LEXEME = "\\w+[!?,.]*|[...]\\p{Blank}+?<!(\\s{1}\\w+)";
     public static final String EMPTY = "";
+
 }

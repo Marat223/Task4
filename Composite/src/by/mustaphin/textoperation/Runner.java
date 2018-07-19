@@ -5,7 +5,7 @@
  */
 package by.mustaphin.textoperation;
 
-import by.mustaphin.textoperation.composite.Component;
+import by.mustaphin.textoperation.composite.Composite;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import by.mustaphin.textoperation.divide.Handler;
 import by.mustaphin.textoperation.utill.TextReader;
@@ -26,7 +26,7 @@ public class Runner {
 	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, RegularExpression.PARAGRAPH);
 	ArrayList<String> data = new ArrayList<>();
 	data.add(new TextReader().read());
-	Component component = new Component();
+	Composite component = new Composite();
 	paragraphDivideHandler.chain(data, component);
     }
 

@@ -5,44 +5,22 @@
  */
 package by.mustaphin.textoperation.composite;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author me
+ * @author marat
  */
-public class Component implements IComposite {
+public interface Component {
 
-    protected final List<IComposite> innerComponent = new ArrayList<>();
+    public String operate();
 
-    @Override
-    public String operate() {
-	StringBuilder stringBuilder = new StringBuilder();
-	for (IComposite component : innerComponent) {
-	    stringBuilder.append(component.operate()).append(" ");
-	}
-	return stringBuilder.toString();
-    }
+    public boolean add(Component component);
 
-    @Override
-    public boolean add(IComposite component) {
-	return innerComponent.add(component);
-    }
+    public boolean remove(Component component);
 
-    @Override
-    public boolean remove(IComposite component) {
-	return innerComponent.remove(component);
-    }
+    public Component get(int index);
 
-    @Override
-    public IComposite get(int index) {
-	return innerComponent.get(index);
-    }
-
-    @Override
-    public List<IComposite> getData() {//TODO
-	return innerComponent;
-    }
+    public List<Component> getData();
 
 }

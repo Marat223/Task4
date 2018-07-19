@@ -5,14 +5,14 @@
  */
 package by.mustaphin.textoperation.divide;
 
-import by.mustaphin.textoperation.composite.Component;
-import by.mustaphin.textoperation.composite.IComposite;
+import by.mustaphin.textoperation.composite.Composite;
 import by.mustaphin.textoperation.composite.Leaf;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import by.mustaphin.textoperation.composite.Component;
 
 /**
  *
@@ -33,10 +33,10 @@ public class Handler {
 	regularExpression = regExp;
     }
 
-    public void handleRequest(ArrayList<String> data, IComposite component) {
+    public void handleRequest(ArrayList<String> data, Component component) {
 	List<String> handled = new ArrayList<>();
 	Pattern pattern = Pattern.compile(regularExpression);
-	List<IComposite> components = findComponents(component);
+	List<Component> components = findComponents(component);
 	int index = 0;
 	for (String string : data) {
 	    Matcher matcher = pattern.matcher(string);
@@ -47,7 +47,7 @@ public class Handler {
 		    components.get(index).add(leaf);
 		} else {
 		    handled.add(text);
-		    components.get(index).add(new Component());
+		    components.get(index).add(new Composite());
 		}
 	    }
 	    index++;
@@ -56,17 +56,17 @@ public class Handler {
 	data.addAll(handled);
     }
 
-    protected List<IComposite> findComponents(IComposite component) {
-	List<IComposite> innerComponent = new ArrayList<>();
+    protected List<Component> findComponents(Component component) {
+	List<Component> innerComponent = new ArrayList<>();
 	if (component.getData().isEmpty()) {
 	    innerComponent.add(component);
 	} else {
-	    for (IComposite paragraphComponent : component.getData()) {
+	    for (Component paragraphComponent : component.getData()) {
 		if (null != paragraphComponent.getData()) {
 		    if (paragraphComponent.getData().isEmpty()) {
 			innerComponent.add(paragraphComponent);
 		    } else {
-			for (IComposite sentenseComponent : paragraphComponent.getData()) {
+			for (Component sentenseComponent : paragraphComponent.getData()) {
 			    if (null != sentenseComponent.getData()) {
 				if (sentenseComponent.getData().isEmpty()) {
 				    innerComponent.add(sentenseComponent);
@@ -90,7 +90,7 @@ public class Handler {
 	return leaf;
     }
 
-    public void chain(ArrayList<String> data, IComposite component) {
+    public void chain(ArrayList<String> data, Component component) {
 	handleRequest(data, component);
 	successor.chain(data, component);
     }
@@ -108,8 +108,8 @@ public class Handler {
 	}
 
 	@Override
-	public void handleRequest(ArrayList<String> data, IComposite component) {
-	    List<IComposite> components = findComponents(component);
+	public void handleRequest(ArrayList<String> data, Component component) {
+	    List<Component> components = findComponents(component);
 	    int index = 0;
 	    for (String string : data) {
 		components.get(index).add(new Leaf(string));
@@ -118,7 +118,7 @@ public class Handler {
 	}
 
 	@Override
-	protected List<IComposite> findComponents(IComposite component) {
+	protected List<Component> findComponents(Component component) {
 	    return super.findComponents(component);
 	}
 
