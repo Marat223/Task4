@@ -10,7 +10,6 @@ import by.mustaphin.textoperation.composite.IComposite;
 import by.mustaphin.textoperation.composite.Leaf;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,55 +33,51 @@ public class DivideHandler {
 	regularExpression = regExp;
     }
 
-    public void handleRequest(ArrayList<String> data, IComposite component) {//TODO предполагаем, что на входе сложный текст
-	parse(data, regularExpression);
-	List<IComposite> components = findComponents(component);//TODO
-	int index = 0;
-	Iterator<String> dataIterator = data.iterator();
-	while (dataIterator.hasNext()) {
-	    Leaf leaf = findLeaf(dataIterator.next(), RegularExpression.LEXEME);
-	    if (null != leaf) {
-		components.get(index).add(leaf);
-		dataIterator.remove();
-	    } else {
-		components.get(index).add(new Component());
-		index++;
-	    }
-	}
-    }
-
-    private List<IComposite> findComponents(IComposite component) {//TODO сделать метод поиска сложных компонентов
-	List<IComposite> innerComponent = new ArrayList<>();
-	for (IComposite paragraphComponent : component.getData()) {
-	    
-	}
-	return innerComponent;
-    }
-
-    private List<IComposite> findComponents(List<IComposite> component) {
-	List<IComposite> innerComponent = new ArrayList<>();
-	for (IComposite subComponent : component) {
-	    if (null != subComponent.getData()) {
-		innerComponent.add(subComponent);
-	    }
-	}
-	for (IComposite subComponent : innerComponent) {
-	    
-	}
-	return innerComponent;
-    }
-
-    private void parse(ArrayList<String> data, String regEx) {
+    public void handleRequest(ArrayList<String> data, IComposite component) {
 	List<String> handled = new ArrayList<>();
-	Pattern pattern = Pattern.compile(regEx);
+	Pattern pattern = Pattern.compile(regularExpression);
+	List<IComposite> components = findComponents(component);
+	int index = 0;
 	for (String string : data) {
 	    Matcher matcher = pattern.matcher(string);
 	    while (matcher.find()) {
-		handled.add(matcher.group());
+		String text = matcher.group();
+		Leaf leaf = findLeaf(text, RegularExpression.LEXEME);
+		if (null != leaf) {
+		    components.get(index).add(leaf);
+		} else {
+		    handled.add(text);
+		    components.get(index).add(new Component());
+		}
 	    }
+	    index++;
 	}
 	data.clear();
 	data.addAll(handled);
+    }
+
+    private List<IComposite> findComponents(IComposite component) {
+	List<IComposite> innerComponent = new ArrayList<>();
+	if (component.getData().isEmpty()) {
+	    innerComponent.add(component);
+	} else {
+	    for (IComposite paragraphComponent : component.getData()) {
+		if (null != paragraphComponent.getData()) {
+		    if (paragraphComponent.getData().isEmpty()) {
+			innerComponent.add(paragraphComponent);
+		    } else {
+			for (IComposite sentenseComponent : paragraphComponent.getData()) {
+			    if (null != sentenseComponent.getData()) {
+				if (sentenseComponent.getData().isEmpty()) {
+				    innerComponent.add(sentenseComponent);
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	}
+	return innerComponent;
     }
 
     private Leaf findLeaf(String data, String leafRegExp) {
