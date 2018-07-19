@@ -109,21 +109,17 @@ public class Handler {
 
 	@Override
 	public void handleRequest(ArrayList<String> data, IComposite component) {
-	    Pattern pattern = Pattern.compile(regularExpression);
 	    List<IComposite> components = findComponents(component);
 	    int index = 0;
 	    for (String string : data) {
-		Matcher matcher = pattern.matcher(string);
-		while (matcher.find()) {
-		    components.get(index).add(new Leaf(matcher.group()));
-		}
+		components.get(index).add(new Leaf(string));
 		index++;
 	    }
 	}
 
 	@Override
 	protected List<IComposite> findComponents(IComposite component) {
-	    return super.findComponents(component); //To change body of generated methods, choose Tools | Templates.
+	    return super.findComponents(component);
 	}
 
     }
