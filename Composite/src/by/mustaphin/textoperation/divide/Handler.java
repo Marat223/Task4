@@ -18,18 +18,18 @@ import java.util.regex.Pattern;
  *
  * @author me
  */
-public class DivideHandler {
+public class Handler {
 
-    private DivideHandler successor;
+    private Handler successor;
     protected String regularExpression;
 
-    public DivideHandler(DivideHandler successor, String regExp) {
+    public Handler(Handler successor, String regExp) {
 	this.successor = successor;
 	regularExpression = regExp;
     }
 
-    public DivideHandler(String regExp) {
-//	this.successor = DefaultHandlerRequest.getHandler();
+    public Handler(String regExp) {
+	this.successor = DefaultHandlerRequest.getHandler();
 	regularExpression = regExp;
     }
 
@@ -95,7 +95,7 @@ public class DivideHandler {
 	successor.chain(data, component);
     }
 
-    public static class DefaultHandlerRequest extends DivideHandler {
+    public static class DefaultHandlerRequest extends Handler {
 
 	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);
 

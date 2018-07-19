@@ -7,7 +7,7 @@ package by.mustaphin.textoperation;
 
 import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.constant.RegularExpression;
-import by.mustaphin.textoperation.divide.DivideHandler;
+import by.mustaphin.textoperation.divide.Handler;
 import by.mustaphin.textoperation.utill.TextReader;
 import java.util.ArrayList;
 
@@ -21,9 +21,9 @@ public class Runner {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//	DivideHandler lexemeDivedeHandler = new DivideHandler(RegularExpression.LEXEME);
-	DivideHandler sentenceDivideHandler = new DivideHandler(RegularExpression.SENTENCE);
-	DivideHandler paragraphDivideHandler = new DivideHandler(sentenceDivideHandler, RegularExpression.PARAGRAPH);
+//	Handler lexemeDivedeHandler = new Handler(RegularExpression.LEXEME);
+	Handler sentenceDivideHandler = new Handler(RegularExpression.SENTENCE);
+	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, RegularExpression.PARAGRAPH);
 	ArrayList<String> data = new ArrayList<>();
 	data.add(new TextReader().read());
 	Component component = new Component();
