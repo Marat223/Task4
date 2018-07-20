@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package by.mustaphin.textoperation.divide;
+package by.mustaphin.textoperation.handle;
 
 import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.composite.Composite;

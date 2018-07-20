@@ -7,7 +7,7 @@ package by.mustaphin.textoperation;
 
 import by.mustaphin.textoperation.composite.Composite;
 import by.mustaphin.textoperation.constant.RegularExpression;
-import by.mustaphin.textoperation.divide.Handler;
+import by.mustaphin.textoperation.handle.Handler;
 import by.mustaphin.textoperation.utill.TextReader;
 import java.util.ArrayList;
 
