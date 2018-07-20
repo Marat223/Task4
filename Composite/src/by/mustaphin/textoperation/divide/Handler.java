@@ -36,7 +36,7 @@ public class Handler {
     public void handleRequest(ArrayList<String> data, Component component) {
 	List<String> handled = new ArrayList<>();
 	Pattern pattern = Pattern.compile(regularExpression);
-	List<Component> components = findComponents(component);
+	List<Component> components = findComposite(component);
 	int index = 0;
 	for (String string : data) {
 	    Matcher matcher = pattern.matcher(string);
@@ -56,28 +56,26 @@ public class Handler {
 	data.addAll(handled);
     }
 
-    protected List<Component> findComponents(Component component) {//TODO сделать рекурсвный метод
+    protected List<Component> findComposite(Component component) {
 	List<Component> innerComponent = new ArrayList<>();
 	if (component.getData().isEmpty()) {
 	    innerComponent.add(component);
 	} else {
-	    for (Component paragraphComponent : component.getData()) {
-		if (null != paragraphComponent.getData()) {
-		    if (paragraphComponent.getData().isEmpty()) {
-			innerComponent.add(paragraphComponent);
-		    } else {
-			for (Component sentenseComponent : paragraphComponent.getData()) {
-			    if (null != sentenseComponent.getData()) {
-				if (sentenseComponent.getData().isEmpty()) {
-				    innerComponent.add(sentenseComponent);
-				}
-			    }
-			}
-		    }
+	    findBottom(component, innerComponent);
+	}
+	return innerComponent;
+    }
+
+    private void findBottom(Component component, List<Component> innerComponent) {
+	for (Component part : component.getData()) {
+	    if (null != part.getData()) {
+		if (part.getData().isEmpty()) {
+		    innerComponent.add(part);
+		} else {
+		    findBottom(part, innerComponent);
 		}
 	    }
 	}
-	return innerComponent;
     }
 
     protected Leaf findLeaf(String data, String leafRegExp) {
@@ -109,7 +107,7 @@ public class Handler {
 
 	@Override
 	public void handleRequest(ArrayList<String> data, Component component) {
-	    List<Component> components = findComponents(component);
+	    List<Component> components = findComposite(component);
 	    int index = 0;
 	    for (String string : data) {
 		components.get(index).add(new Leaf(string));
@@ -120,6 +118,7 @@ public class Handler {
 	@Override
 	public void chain(ArrayList<String> data, Component component) {
 	    handleRequest(data, component);
+	    System.out.println(component.operate());
 	}
 
     }
