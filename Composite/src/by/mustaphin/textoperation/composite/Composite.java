@@ -20,7 +20,7 @@ public class Composite implements Component {
     public String operate() {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component component : innerComponent) {
-	    stringBuilder.append(component.operate());
+	    stringBuilder.append(component.operate()).append(" ");
 	}
 	return stringBuilder.toString();
     }

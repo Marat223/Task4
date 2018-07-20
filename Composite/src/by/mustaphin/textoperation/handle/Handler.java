@@ -42,7 +42,8 @@ public class Handler {
 	    Matcher matcher = pattern.matcher(string);
 	    while (matcher.find()) {
 		String text = matcher.group();
-		Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME);
+//		Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME);
+		Leaf leaf = null;
 		if (null != leaf) {
 		    components.get(index).add(leaf);
 		} else {
@@ -52,7 +53,7 @@ public class Handler {
 	    }
 	    index++;
 	}
-	data.clear();
+	data = new ArrayList<>();
 	data.addAll(handled);
     }
 
@@ -95,7 +96,7 @@ public class Handler {
 
     public static class DefaultHandlerRequest extends Handler {
 
-	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.EMPTY);
+	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.LEXEME);
 
 	public static DefaultHandlerRequest getHandler() {
 	    return handler;
@@ -107,10 +108,14 @@ public class Handler {
 
 	@Override
 	public void handleRequest(ArrayList<String> data, Component component) {
+	    Pattern pattern = Pattern.compile(regularExpression);
 	    List<Component> components = findComposite(component);
 	    int index = 0;
 	    for (String string : data) {
-		components.get(index).add(new Leaf(string));
+		Matcher matcher = pattern.matcher(string);
+		while (matcher.find()) {
+		    components.get(index).add(new Leaf(matcher.group()));
+		}
 		index++;
 	    }
 	}
