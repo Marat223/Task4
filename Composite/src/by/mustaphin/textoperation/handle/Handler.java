@@ -34,6 +34,7 @@ public class Handler {
     }
 
     public void handleRequest(ArrayList<String> data, Component component) {
+	textAppearsLeaf(data, component);//TODO седелать что бы остальные звенья проверки не вызывались
 	List<String> handled = new ArrayList<>();
 	Pattern pattern = Pattern.compile(regularExpression);
 	List<Component> components = findComposite(component);
@@ -75,6 +76,16 @@ public class Handler {
 		} else {
 		    findBottom(part, innerComponent);
 		}
+	    }
+	}
+    }
+
+    private void textAppearsLeaf(ArrayList<String> data, Component component) {
+	if (component.getData().isEmpty() && data.size() == 1) {
+	    Leaf leaf = findLeaf(data.get(0), RegularExpression.SINGLE_LEXEME);
+	    if (null != leaf) {
+		component = leaf;
+		data = new ArrayList<>();
 	    }
 	}
     }
