@@ -42,7 +42,7 @@ public class Handler {
 	    Matcher matcher = pattern.matcher(string);
 	    while (matcher.find()) {
 		String text = matcher.group();
-//		Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME);
+//		Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME);//TODO create correct regular expression for finding single lexeme
 		Leaf leaf = null;
 		if (null != leaf) {
 		    components.get(index).add(leaf);
@@ -96,7 +96,7 @@ public class Handler {
 
     public static class DefaultHandlerRequest extends Handler {
 
-	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.LEXEME);
+	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.LEXEME);//TODO replace definition of regular expression to another location
 
 	public static DefaultHandlerRequest getHandler() {
 	    return handler;
