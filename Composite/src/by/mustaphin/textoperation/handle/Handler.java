@@ -5,6 +5,8 @@
  */
 package by.mustaphin.textoperation.handle;
 
+import by.mustaphin.textoperation.assembly.AbstractAssembly;
+import by.mustaphin.textoperation.assembly.LeafAssembly;
 import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.composite.Composite;
 import by.mustaphin.textoperation.composite.Leaf;
@@ -22,19 +24,20 @@ public class Handler {
 
     private Handler successor;
     protected String regularExpression;
+    protected AbstractAssembly assembly;
 
-    public Handler(Handler successor, String regExp) {
+    public Handler(Handler successor, String regExp, AbstractAssembly assembly) {
 	this.successor = successor;
 	regularExpression = regExp;
     }
 
-    public Handler(String regExp) {
+    public Handler(String regExp, AbstractAssembly assembly) {
 	this.successor = DefaultHandlerRequest.getHandler();
 	regularExpression = regExp;
     }
 
     public void handleRequest(ArrayList<String> data, Component component) {
-	textAppearsLeaf(data, component);//TODO седелать что бы остальные звенья проверки не вызывались
+	textAppearsLeaf(data, component);//TODO седелать что бы остальные звенья проверки могли не вызываться
 	List<String> handled = new ArrayList<>();
 	Pattern pattern = Pattern.compile(regularExpression);
 	List<Component> components = findComposite(component);
@@ -49,7 +52,7 @@ public class Handler {
 		    components.get(index).add(leaf);
 		} else {
 		    handled.add(text);
-		    components.get(index).add(new Composite());
+		    components.get(index).add(new Composite(assembly));
 		}
 	    }
 	    index++;
@@ -95,7 +98,7 @@ public class Handler {
 	Pattern pattern = Pattern.compile(leafRegExp);
 	Matcher matcher = pattern.matcher(data);
 	if (matcher.find()) {
-	    leaf = new Leaf(data);
+	    leaf = new Leaf(data, new LeafAssembly());//TODO
 	}
 	return leaf;
     }
@@ -114,7 +117,7 @@ public class Handler {
 	}
 
 	private DefaultHandlerRequest(String regExp) {
-	    super(regExp);
+	    super(regExp, new LeafAssembly());
 	}
 
 	@Override
@@ -125,7 +128,7 @@ public class Handler {
 	    for (String string : data) {
 		Matcher matcher = pattern.matcher(string);
 		while (matcher.find()) {
-		    components.get(index).add(new Leaf(matcher.group()));
+		    components.get(index).add(new Leaf(matcher.group(), assembly));
 		}
 		index++;
 	    }

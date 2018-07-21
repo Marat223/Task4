@@ -5,6 +5,7 @@
  */
 package by.mustaphin.textoperation.composite;
 
+import by.mustaphin.textoperation.assembly.AbstractAssembly;
 import java.util.List;
 
 /**
@@ -13,15 +14,16 @@ import java.util.List;
  */
 public class Leaf implements Component {
 
-    private String data;
+    private String content;
+    private AbstractAssembly assembly;
 
-    public Leaf(String data) {
-	this.data = data;
+    public Leaf(String content, AbstractAssembly assembly) {
+	this.content = content;
     }
 
     @Override
     public String operate() {
-	return data;
+	return assembly.construct(content);
     }
 
     @Override

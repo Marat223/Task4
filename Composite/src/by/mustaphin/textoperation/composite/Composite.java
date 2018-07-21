@@ -5,7 +5,7 @@
  */
 package by.mustaphin.textoperation.composite;
 
-import by.mustaphin.textoperation.assembly.Assembly;
+import by.mustaphin.textoperation.assembly.AbstractAssembly;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +16,14 @@ import java.util.List;
 public class Composite implements Component {
 
     protected final List<Component> innerComponent = new ArrayList<>();
+    private AbstractAssembly assembly;
+
+    public Composite(AbstractAssembly assembly) {
+	this.assembly = assembly;
+    }
 
     @Override
     public String operate() {
-	Assembly assembly = new Assembly();
 	return assembly.construct(innerComponent);
     }
 

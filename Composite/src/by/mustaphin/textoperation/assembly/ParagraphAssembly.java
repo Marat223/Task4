@@ -6,25 +6,27 @@
 package by.mustaphin.textoperation.assembly;
 
 import by.mustaphin.textoperation.composite.Component;
-import by.mustaphin.textoperation.constant.RegularExpression;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  *
  * @author me
  */
-public class Assembly {
+public class ParagraphAssembly extends AbstractAssembly {
 
+    @Override
     public String construct(List<Component> component) {
 	StringBuilder stringBuilder = new StringBuilder();
-	Pattern patternLexeme = Pattern.compile(RegularExpression.LEXEME);
-	Pattern patternSentense = Pattern.compile(RegularExpression.SENTENCE);
-	Pattern patternParagraph = Pattern.compile(RegularExpression.PARAGRAPH);
 	for (Component inner : component) {
-	    stringBuilder.append(inner.operate());//TODO доделать!!!
+	    stringBuilder.append(inner.operate()).append(" ");
 	}
+	stringBuilder.append("$");
 	return stringBuilder.toString();
+    }
+
+    @Override
+    public String construct(String data) {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
