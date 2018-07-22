@@ -12,21 +12,20 @@ import java.util.List;
  *
  * @author me
  */
-public class SentenseAssembly extends AbstractAssembly {
+public class ParagraphPreset extends AbstractPreset {
+
+    public ParagraphPreset(String regularExpression) {
+	super(regularExpression);
+    }
 
     @Override
-    public String construct(List<Component> component) {
+    public String assembly(List<Component> component) {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component inner : component) {
 	    stringBuilder.append(inner.operate()).append(" ");
 	}
 	stringBuilder.append("$");
 	return stringBuilder.toString();
-    }
-
-    @Override
-    public String construct(String data) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

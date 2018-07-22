@@ -12,20 +12,14 @@ import java.util.List;
  *
  * @author me
  */
-public class ParagraphAssembly extends AbstractAssembly {
+public class LeafPreset extends AbstractPreset {
 
-    @Override
-    public String construct(List<Component> component) {
-	StringBuilder stringBuilder = new StringBuilder();
-	for (Component inner : component) {
-	    stringBuilder.append(inner.operate()).append(" ");
-	}
-	stringBuilder.append("$");
-	return stringBuilder.toString();
+    public LeafPreset(String regularExpression) {
+	super(regularExpression);
     }
 
     @Override
-    public String construct(String data) {
+    public String assembly(List<Component> component) {
 	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

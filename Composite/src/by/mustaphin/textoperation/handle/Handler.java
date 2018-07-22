@@ -5,8 +5,7 @@
  */
 package by.mustaphin.textoperation.handle;
 
-import by.mustaphin.textoperation.assembly.AbstractAssembly;
-import by.mustaphin.textoperation.assembly.LeafAssembly;
+import by.mustaphin.textoperation.assembly.AbstractPreset;
 import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.composite.Composite;
 import by.mustaphin.textoperation.composite.Leaf;
@@ -23,23 +22,21 @@ import java.util.regex.Pattern;
 public class Handler {
 
     private Handler successor;
-    protected String regularExpression;
-    protected AbstractAssembly assembly;
+    protected AbstractPreset preset;
 
-    public Handler(Handler successor, String regExp, AbstractAssembly assembly) {
+    public Handler(Handler successor, AbstractPreset preset) {
 	this.successor = successor;
-	regularExpression = regExp;
+	this.preset = preset;
     }
 
-    public Handler(String regExp, AbstractAssembly assembly) {
-	this.successor = DefaultHandlerRequest.getHandler();
-	regularExpression = regExp;
+    public Handler() {
+	successor = DefaultHandlerRequest.getHandler();
     }
 
     public void handleRequest(ArrayList<String> data, Component component) {
 	textAppearsLeaf(data, component);//TODO седелать что бы остальные звенья проверки могли не вызываться
 	List<String> handled = new ArrayList<>();
-	Pattern pattern = Pattern.compile(regularExpression);
+	Pattern pattern = Pattern.compile(preset.getRegularExpression());
 	List<Component> components = findComposite(component);
 	int index = 0;
 	for (String string : data) {
@@ -52,7 +49,7 @@ public class Handler {
 		    components.get(index).add(leaf);
 		} else {
 		    handled.add(text);
-		    components.get(index).add(new Composite(assembly));
+		    components.get(index).add(new Composite(preset));
 		}
 	    }
 	    index++;
@@ -98,7 +95,7 @@ public class Handler {
 	Pattern pattern = Pattern.compile(leafRegExp);
 	Matcher matcher = pattern.matcher(data);
 	if (matcher.find()) {
-	    leaf = new Leaf(data, new LeafAssembly());//TODO
+	    leaf = new Leaf(data);
 	}
 	return leaf;
     }
@@ -110,25 +107,25 @@ public class Handler {
 
     public static class DefaultHandlerRequest extends Handler {
 
-	private static DefaultHandlerRequest handler = new DefaultHandlerRequest(RegularExpression.LEXEME);//TODO replace definition of regular expression to another location
+	private static DefaultHandlerRequest handler = new DefaultHandlerRequest();//TODO replace definition of regular expression to another location
 
 	public static DefaultHandlerRequest getHandler() {
 	    return handler;
 	}
 
-	private DefaultHandlerRequest(String regExp) {
-	    super(regExp, new LeafAssembly());
+	public DefaultHandlerRequest(Handler successor, AbstractPreset preset) {
+	    super(successor, preset);
 	}
 
 	@Override
 	public void handleRequest(ArrayList<String> data, Component component) {
-	    Pattern pattern = Pattern.compile(regularExpression);
+	    Pattern pattern = Pattern.compile(preset.getRegularExpression());
 	    List<Component> components = findComposite(component);
 	    int index = 0;
 	    for (String string : data) {
 		Matcher matcher = pattern.matcher(string);
 		while (matcher.find()) {
-		    components.get(index).add(new Leaf(matcher.group(), assembly));
+		    components.get(index).add(new Leaf(matcher.group()));
 		}
 		index++;
 	    }

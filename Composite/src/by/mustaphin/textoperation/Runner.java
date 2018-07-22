@@ -5,8 +5,7 @@
  */
 package by.mustaphin.textoperation;
 
-import by.mustaphin.textoperation.assembly.ParagraphAssembly;
-import by.mustaphin.textoperation.assembly.SentenseAssembly;
+import by.mustaphin.textoperation.assembly.SentensePreset;
 import by.mustaphin.textoperation.composite.Composite;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import by.mustaphin.textoperation.handle.Handler;
@@ -23,11 +22,11 @@ public class Runner {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-	Handler sentenceDivideHandler = new Handler(RegularExpression.SENTENCE, new SentenseAssembly());
-	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, RegularExpression.PARAGRAPH, new SentenseAssembly());
+	Handler sentenceDivideHandler = new Handler(RegularExpression.SENTENCE, new SentensePreset());
+	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, new SentensePreset());
 	ArrayList<String> data = new ArrayList<>();
 	data.add(new TextReader().read());
-	Composite component = new Composite(new ParagraphAssembly());
+	Composite component = new Composite();
 	paragraphDivideHandler.chain(data, component);
     }
 

@@ -12,16 +12,18 @@ import java.util.List;
  *
  * @author me
  */
-public class LeafAssembly extends AbstractAssembly {
+public abstract class AbstractPreset {
 
-    @Override
-    public String construct(List<Component> component) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private String regularExpression;
+
+    public AbstractPreset(String regularExpression) {
+	this.regularExpression = regularExpression;
     }
 
-    @Override
-    public String construct(String data) {
-	return data;
+    public abstract String assembly(List<Component> component);
+
+    public String getRegularExpression() {
+	return regularExpression;
     }
 
 }
