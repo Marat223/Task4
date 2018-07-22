@@ -15,6 +15,11 @@ import java.util.List;
 public class TextPreset extends AbstractPreset {
 
     @Override
+    public String getRegularExpression() {
+	return regularExpression;
+    }
+
+    @Override
     public String assembly(List<Component> component) {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component inner : component) {

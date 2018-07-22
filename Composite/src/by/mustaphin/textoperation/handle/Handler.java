@@ -37,13 +37,13 @@ public class Handler {
 	this.preset = preset;
     }
 
-    public void handleRequest(ArrayList<String> data, Component component) {
-	textAppearsLeaf(data, component);//TODO седелать что бы остальные звенья проверки могли не вызываться
+    public void handleRequest(final ArrayList<String> DATA, Component component) {
+	textAppearsLeaf(DATA, component);//TODO седелать что бы остальные звенья проверки могли не вызываться
 	List<String> handled = new ArrayList<>();
 	Pattern pattern = Pattern.compile(preset.getRegularExpression());
 	List<Component> components = findComposite(component);
 	int index = 0;
-	for (String string : data) {
+	for (String string : DATA) {
 	    Matcher matcher = pattern.matcher(string);
 	    while (matcher.find()) {
 		String text = matcher.group();
@@ -58,8 +58,8 @@ public class Handler {
 	    }
 	    index++;
 	}
-	data = new ArrayList<>();
-	data.addAll(handled);
+	DATA.clear();
+	DATA.addAll(handled);
     }
 
     protected List<Component> findComposite(Component component) {
@@ -134,7 +134,6 @@ public class Handler {
 	@Override
 	public void chain(ArrayList<String> data, Component component) {
 	    handleRequest(data, component);
-//	    System.out.println(component.operate());
 	}
 
     }

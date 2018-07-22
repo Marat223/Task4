@@ -14,7 +14,7 @@ import java.util.List;
  */
 public abstract class AbstractPreset {
 
-    private String regularExpression;
+    protected String regularExpression;
 
     public AbstractPreset() {
     }

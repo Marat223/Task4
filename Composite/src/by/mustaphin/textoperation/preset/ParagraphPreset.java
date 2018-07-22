@@ -19,11 +19,16 @@ public class ParagraphPreset extends AbstractPreset {
     }
 
     @Override
+    public String getRegularExpression() {
+	return regularExpression;
+    }
+
+    @Override
     public String assembly(List<Component> component) {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component inner : component) {
 	    String content = inner.operate();
-	    stringBuilder.append(content.substring(0, content.length() - 2));
+	    stringBuilder.append(content.substring(0, content.length() - 1));
 	}
 	return stringBuilder.toString();
     }
