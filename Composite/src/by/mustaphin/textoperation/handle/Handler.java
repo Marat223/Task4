@@ -5,11 +5,11 @@
  */
 package by.mustaphin.textoperation.handle;
 
-import by.mustaphin.textoperation.assembly.AbstractPreset;
 import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.composite.Composite;
 import by.mustaphin.textoperation.composite.Leaf;
 import by.mustaphin.textoperation.constant.RegularExpression;
+import by.mustaphin.textoperation.preset.AbstractPreset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -30,7 +30,11 @@ public class Handler {
     }
 
     public Handler() {
+    }
+
+    public Handler(AbstractPreset preset) {
 	successor = DefaultHandlerRequest.getHandler();
+	this.preset = preset;
     }
 
     public void handleRequest(ArrayList<String> data, Component component) {
@@ -113,13 +117,9 @@ public class Handler {
 	    return handler;
 	}
 
-	public DefaultHandlerRequest(Handler successor, AbstractPreset preset) {
-	    super(successor, preset);
-	}
-
 	@Override
 	public void handleRequest(ArrayList<String> data, Component component) {
-	    Pattern pattern = Pattern.compile(preset.getRegularExpression());
+	    Pattern pattern = Pattern.compile(RegularExpression.LEXEME);
 	    List<Component> components = findComposite(component);
 	    int index = 0;
 	    for (String string : data) {

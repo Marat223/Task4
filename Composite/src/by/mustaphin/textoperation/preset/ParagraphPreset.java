@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package by.mustaphin.textoperation.assembly;
+package by.mustaphin.textoperation.preset;
 
 import by.mustaphin.textoperation.composite.Component;
 import java.util.List;
@@ -12,15 +12,20 @@ import java.util.List;
  *
  * @author me
  */
-public class LeafPreset extends AbstractPreset {
+public class ParagraphPreset extends AbstractPreset {
 
-    public LeafPreset(String regularExpression) {
+    public ParagraphPreset(String regularExpression) {
 	super(regularExpression);
     }
 
     @Override
     public String assembly(List<Component> component) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	StringBuilder stringBuilder = new StringBuilder();
+	for (Component inner : component) {
+	    stringBuilder.append(inner.operate()).append(" ");
+	}
+	stringBuilder.append("$");
+	return stringBuilder.toString();
     }
 
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package by.mustaphin.textoperation.assembly;
+package by.mustaphin.textoperation.preset;
 
 import by.mustaphin.textoperation.composite.Component;
 import java.util.List;
@@ -15,6 +15,9 @@ import java.util.List;
 public abstract class AbstractPreset {
 
     private String regularExpression;
+
+    public AbstractPreset() {
+    }
 
     public AbstractPreset(String regularExpression) {
 	this.regularExpression = regularExpression;
