@@ -23,7 +23,7 @@ public class ParagraphPreset extends AbstractPreset {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component inner : component) {
 	    String content = inner.operate();
-	    stringBuilder.append(content.substring(0, content.length() - 2)).append("#");
+	    stringBuilder.append(content.substring(0, content.length() - 2));
 	}
 	return stringBuilder.toString();
     }

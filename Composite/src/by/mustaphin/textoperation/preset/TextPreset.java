@@ -18,7 +18,7 @@ public class TextPreset extends AbstractPreset {
     public String assembly(List<Component> component) {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component inner : component) {
-	    stringBuilder.append(inner.operate()).append("\n");
+	    stringBuilder.append("    ").append(inner.operate()).append("\n");
 	}
 	return stringBuilder.toString();
     }
