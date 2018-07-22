@@ -27,10 +27,9 @@ public class ParagraphPreset extends AbstractPreset {
     public String assembly(List<Component> component) {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component inner : component) {
-	    String content = inner.operate();
-	    stringBuilder.append(content.substring(0, content.length() - 1));
+	    stringBuilder.append(inner.operate());
 	}
-	return stringBuilder.toString();
+	return stringBuilder.toString().substring(0, stringBuilder.length() - 1);
     }
 
 }
