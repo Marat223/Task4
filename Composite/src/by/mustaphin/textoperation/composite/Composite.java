@@ -24,6 +24,9 @@ public class Composite implements Component {
 
     @Override
     public String operate() {
+	for (Component component : innerComponent) {
+	    component.operate();
+	}
 	return preset.assembly(innerComponent);
     }
 

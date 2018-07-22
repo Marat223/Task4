@@ -134,7 +134,7 @@ public class Handler {
 	@Override
 	public void chain(ArrayList<String> data, Component component) {
 	    handleRequest(data, component);
-	    System.out.println(component.operate());
+//	    System.out.println(component.operate());
 	}
 
     }

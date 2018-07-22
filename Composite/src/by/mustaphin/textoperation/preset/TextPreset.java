@@ -16,7 +16,11 @@ public class TextPreset extends AbstractPreset {
 
     @Override
     public String assembly(List<Component> component) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	StringBuilder stringBuilder = new StringBuilder();
+	for (Component inner : component) {
+	    stringBuilder.append(inner.operate()).append("\n");
+	}
+	return stringBuilder.toString();
     }
 
 }

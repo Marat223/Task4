@@ -24,7 +24,6 @@ public class SentensePreset extends AbstractPreset {
 	for (Component inner : component) {
 	    stringBuilder.append(inner.operate()).append(" ");
 	}
-	stringBuilder.append("$");
 	return stringBuilder.toString();
     }
 

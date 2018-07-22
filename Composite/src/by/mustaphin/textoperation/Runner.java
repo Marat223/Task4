@@ -8,6 +8,7 @@ package by.mustaphin.textoperation;
 import by.mustaphin.textoperation.composite.Composite;
 import by.mustaphin.textoperation.constant.RegularExpression;
 import by.mustaphin.textoperation.handle.Handler;
+import by.mustaphin.textoperation.preset.ParagraphPreset;
 import by.mustaphin.textoperation.preset.SentensePreset;
 import by.mustaphin.textoperation.preset.TextPreset;
 import by.mustaphin.textoperation.utill.TextReader;
@@ -24,11 +25,12 @@ public class Runner {
      */
     public static void main(String[] args) {
 	Handler sentenceDivideHandler = new Handler(new SentensePreset(RegularExpression.SENTENCE));
-	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, new SentensePreset(RegularExpression.PARAGRAPH));
+	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, new ParagraphPreset(RegularExpression.PARAGRAPH));
 	ArrayList<String> data = new ArrayList<>();
 	data.add(new TextReader().read());
 	Composite component = new Composite(new TextPreset());
 	paragraphDivideHandler.chain(data, component);
+	System.out.println(component.operate());
     }
 
 }
