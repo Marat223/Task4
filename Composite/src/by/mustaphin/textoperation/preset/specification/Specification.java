@@ -15,6 +15,6 @@ import java.util.List;
  */
 public interface Specification {
 
-    public List<Component> specified(List<Component> component, final Type TYPE);
+    public List<Component> specified(List<Component> component, Type type);
 
 }

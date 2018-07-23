@@ -17,8 +17,8 @@ import java.util.List;
 public class AmountSentenseSpecification implements Specification {
 
     @Override
-    public List<Component> specified(List<Component> component, final Type TYPE) {
-	if (Type.TEXT == TYPE) {
+    public List<Component> specified(List<Component> component, Type type) {
+	if (Type.TEXT == type) {
 	    Component[] componentArray = new Component[component.size()];
 	    for (int i = 0; i < component.size(); i++) {
 		componentArray[i] = component.get(i);
