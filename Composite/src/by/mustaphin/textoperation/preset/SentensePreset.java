@@ -6,6 +6,7 @@
 package by.mustaphin.textoperation.preset;
 
 import by.mustaphin.textoperation.composite.Component;
+import by.mustaphin.textoperation.preset.specification.Specification;
 import java.util.List;
 
 /**
@@ -14,8 +15,8 @@ import java.util.List;
  */
 public class SentensePreset extends AbstractPreset {
 
-    public SentensePreset(String regularExpression) {
-	super(regularExpression);
+    public SentensePreset(String regularExpression, Type type) {
+	super(regularExpression, type);
     }
 
     @Override
@@ -25,6 +26,15 @@ public class SentensePreset extends AbstractPreset {
 
     @Override
     public String assembly(List<Component> component) {
+	StringBuilder stringBuilder = new StringBuilder();
+	for (Component inner : component) {
+	    stringBuilder.append(inner.operate()).append(" ");
+	}
+	return stringBuilder.toString();
+    }
+
+    @Override
+    public String assembly(List<Component> component, Specification specification) {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component inner : component) {
 	    stringBuilder.append(inner.operate()).append(" ");

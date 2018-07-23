@@ -5,6 +5,7 @@
  */
 package by.mustaphin.textoperation.composite;
 
+import by.mustaphin.textoperation.preset.specification.Specification;
 import java.util.List;
 
 /**
@@ -14,6 +15,8 @@ import java.util.List;
 public interface Component {
 
     public String operate();
+
+    public String operate(Specification specification);
 
     public boolean add(Component component);
 

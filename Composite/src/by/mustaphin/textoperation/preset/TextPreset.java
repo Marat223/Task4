@@ -6,6 +6,7 @@
 package by.mustaphin.textoperation.preset;
 
 import by.mustaphin.textoperation.composite.Component;
+import by.mustaphin.textoperation.preset.specification.Specification;
 import java.util.List;
 
 /**
@@ -14,6 +15,10 @@ import java.util.List;
  */
 public class TextPreset extends AbstractPreset {
 
+    public TextPreset(Type type) {
+	super(type);
+    }
+
     @Override
     public String getRegularExpression() {
 	return regularExpression;
@@ -21,6 +26,15 @@ public class TextPreset extends AbstractPreset {
 
     @Override
     public String assembly(List<Component> component) {
+	StringBuilder stringBuilder = new StringBuilder();
+	for (Component inner : component) {
+	    stringBuilder.append("    ").append(inner.operate()).append("\n");
+	}
+	return stringBuilder.toString();
+    }
+
+    @Override
+    public String assembly(List<Component> component, Specification specification) {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component inner : component) {
 	    stringBuilder.append("    ").append(inner.operate()).append("\n");

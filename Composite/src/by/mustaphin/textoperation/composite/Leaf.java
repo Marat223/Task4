@@ -5,6 +5,7 @@
  */
 package by.mustaphin.textoperation.composite;
 
+import by.mustaphin.textoperation.preset.specification.Specification;
 import java.util.List;
 
 /**
@@ -42,6 +43,11 @@ public class Leaf implements Component {
     @Override
     public List<Component> getData() {
 	return null;
+    }
+
+    @Override
+    public String operate(Specification specification) {
+	return operate();
     }
 
 }

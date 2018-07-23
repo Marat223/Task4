@@ -6,6 +6,7 @@
 package by.mustaphin.textoperation.composite;
 
 import by.mustaphin.textoperation.preset.AbstractPreset;
+import by.mustaphin.textoperation.preset.specification.Specification;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,11 @@ public class Composite implements Component {
     @Override
     public String operate() {
 	return preset.assembly(innerComponent);
+    }
+
+    @Override
+    public String operate(Specification specification) {
+	return preset.assembly(innerComponent, specification);
     }
 
     @Override
