@@ -5,12 +5,16 @@
  */
 package by.mustaphin.textoperation.preset.specification;
 
+import by.mustaphin.textoperation.composite.Component;
+import by.mustaphin.textoperation.preset.Type;
+import java.util.List;
+
 /**
  *
  * @author me
  */
 public interface Specification {
 
-    public String specified(String specefied);
+    public List<Component> specified(List<Component> component, final Type TYPE);
 
 }

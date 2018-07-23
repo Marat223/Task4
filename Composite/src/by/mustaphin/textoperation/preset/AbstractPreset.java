@@ -15,7 +15,7 @@ import java.util.List;
  */
 public abstract class AbstractPreset {
 
-    private Type type;
+    protected Type type;
 
     protected String regularExpression;
 
@@ -30,14 +30,12 @@ public abstract class AbstractPreset {
 
     public abstract String assembly(List<Component> component);
 
-    public abstract String assembly(List<Component> component, Specification specification);
+    public String assembly(List<Component> component, Specification specification) {
+	return assembly(specification.specified(component, type));
+    }
 
     public String getRegularExpression() {
 	return regularExpression;
-    }
-
-    public Type getType() {
-	return type;
     }
 
 }

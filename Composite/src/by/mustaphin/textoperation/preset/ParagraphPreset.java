@@ -6,7 +6,6 @@
 package by.mustaphin.textoperation.preset;
 
 import by.mustaphin.textoperation.composite.Component;
-import by.mustaphin.textoperation.preset.specification.Specification;
 import java.util.List;
 
 /**
@@ -26,15 +25,6 @@ public class ParagraphPreset extends AbstractPreset {
 
     @Override
     public String assembly(List<Component> component) {
-	StringBuilder stringBuilder = new StringBuilder();
-	for (Component inner : component) {
-	    stringBuilder.append(inner.operate());
-	}
-	return stringBuilder.toString().substring(0, stringBuilder.length() - 1);
-    }
-
-    @Override
-    public String assembly(List<Component> component, Specification specification) {
 	StringBuilder stringBuilder = new StringBuilder();
 	for (Component inner : component) {
 	    stringBuilder.append(inner.operate());

@@ -5,6 +5,11 @@
  */
 package by.mustaphin.textoperation.preset.specification;
 
+import by.mustaphin.textoperation.composite.Component;
+import by.mustaphin.textoperation.preset.Type;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  *
  * @author me
@@ -12,8 +17,22 @@ package by.mustaphin.textoperation.preset.specification;
 public class AmountSentenseSpecification implements Specification {
 
     @Override
-    public String specified(String specefied) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Component> specified(List<Component> component, final Type TYPE) {
+	if (Type.TEXT == TYPE) {
+	    Component[] componentArray = new Component[component.size()];
+	    for (int i = 0; i < component.size(); i++) {
+		componentArray[i] = component.get(i);
+	    }
+	    for (int i = 0; i < componentArray.length - 1; i++) {
+		if (componentArray[i].getData().size() < componentArray[i + 1].getData().size()) {
+		    Component temoraryComponent = componentArray[i];
+		    componentArray[i] = componentArray[i + 1];
+		    componentArray[i + 1] = temoraryComponent;
+		}
+	    }
+	    return Arrays.asList(componentArray);
+	}
+	return component;
     }
 
 }

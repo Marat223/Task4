@@ -5,15 +5,24 @@
  */
 package by.mustaphin.textoperation.preset.specification;
 
+import by.mustaphin.textoperation.composite.Component;
+import by.mustaphin.textoperation.preset.Type;
+import java.util.List;
+
 /**
  *
  * @author me
  */
 public class LengthLexemeSpecification implements Specification {
 
+    /**
+     *
+     * @param specefied the value of specefied
+     */
     @Override
-    public String specified(String specefied) {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Component> specified(List<Component> component, final Type TYPE) {
+
+	return null;
     }
 
 }
