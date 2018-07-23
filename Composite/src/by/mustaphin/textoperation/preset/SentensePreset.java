@@ -29,7 +29,7 @@ public class SentensePreset extends AbstractPreset {
 	for (Component inner : component) {
 	    stringBuilder.append(inner.operate()).append(" ");
 	}
-	return stringBuilder.toString();
+	return stringBuilder.toString().substring(0, stringBuilder.length() - 1);
     }
 
 }
