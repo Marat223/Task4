@@ -7,7 +7,6 @@ package by.mustaphin.textoperation.preset.specification;
 
 import by.mustaphin.textoperation.composite.Component;
 import by.mustaphin.textoperation.preset.Type;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,18 +22,10 @@ public class LengthLexemeSpecification implements Specification {
     @Override
     public List<Component> specified(List<Component> component, Type type) {
 	if (Type.PARAGRAPH == type) {
-	    Component[] componentArray = new Component[component.size()];
-	    for (int i = 0; i < component.size(); i++) {
-		componentArray[i] = component.get(i);
+	    SortingStoreSingletone sortingStore = SortingStoreSingletone.getInstanse();
+	    for (Component sentense : component) {
+		sortingStore.addComponent(sentense);
 	    }
-	    for (int i = 0; i < componentArray.length - 1; i++) {
-		if (componentArray[i].getData().size() < componentArray[i + 1].getData().size()) {
-		    Component temoraryComponent = componentArray[i];
-		    componentArray[i] = componentArray[i + 1];
-		    componentArray[i + 1] = temoraryComponent;
-		}
-	    }
-	    return Arrays.asList(componentArray);
 	}
 	return component;
     }

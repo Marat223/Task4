@@ -44,9 +44,9 @@ public class Runner {
 	Composite component = new Composite(textPreset);
 	paragraphDivideHandler.chain(data, component);
 
-	System.out.println(component.operate());
+//	System.out.println(component.operate());
 //	System.out.println(component.operate(amountSentense));
-//	System.out.println(component.operate(lengthLexeme));
+	System.out.println(component.operate(lengthLexeme));
     }
 
 }
