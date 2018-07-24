@@ -32,21 +32,10 @@ public class SortingStoreSingletone {
 
     public void addComponent(Component component) {
 	this.component.add(component);
-
     }
 
     private void sort() {
-	Component[] componentArray = new Component[component.size()];
-	for (int i = 0; i < component.size(); i++) {
-	    componentArray[i] = component.get(i);
-	}
-	for (int i = 0; i < componentArray.length - 1; i++) {
-	    if (componentArray[i].getData().size() < componentArray[i + 1].getData().size()) {
-		Component temoraryComponent = componentArray[i];
-		componentArray[i] = componentArray[i + 1];
-		componentArray[i + 1] = temoraryComponent;
-	    }
-	}
+	//TODO !!!
     }
 
 }
