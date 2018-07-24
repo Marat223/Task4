@@ -7,6 +7,8 @@ package by.mustaphin.textoperation.preset.specification;
 
 import by.mustaphin.textoperation.composite.Component;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -35,7 +37,17 @@ public class SortingStore {
     }
 
     private void sort() {
-	
+	Component[] arrayComponent = new Component[component.size()];
+	for (int i = 0; i < component.size(); i++) {
+	    arrayComponent[i] = component.get(i);
+	}
+	Collections.sort(component, new Comparator<Component>() {
+	    @Override
+	    public int compare(Component firtsComponent, Component secondComponent) {
+		
+	    }
+
+	});
     }
 
 }
