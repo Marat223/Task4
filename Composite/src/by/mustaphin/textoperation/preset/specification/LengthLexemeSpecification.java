@@ -22,10 +22,12 @@ public class LengthLexemeSpecification implements Specification {
     @Override
     public List<Component> specified(List<Component> component, Type type) {
 	if (Type.PARAGRAPH == type) {
-	    SortingStoreSingletone sortingStore = SortingStoreSingletone.getInstanse();
+	    SortingStore sortingStore = SortingStore.getInstanse();
 	    for (Component sentense : component) {
 		sortingStore.addComponent(sentense);
 	    }
+	}else if(Type.TEXT == type){
+	    
 	}
 	return component;
     }

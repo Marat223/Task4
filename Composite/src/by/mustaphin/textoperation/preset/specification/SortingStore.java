@@ -13,20 +13,20 @@ import java.util.List;
  *
  * @author me
  */
-public class SortingStoreSingletone {
+public class SortingStore {
 
     private List<Component> component = new ArrayList<>();
 
-    private SortingStoreSingletone() {
+    private SortingStore() {
     }
 
     private static class SingletoneHolder {
 
-	private static final SortingStoreSingletone INSTANSE = new SortingStoreSingletone();
+	private static final SortingStore INSTANSE = new SortingStore();
 
     }
 
-    public static SortingStoreSingletone getInstanse() {
+    public static SortingStore getInstanse() {
 	return SingletoneHolder.INSTANSE;
     }
 
@@ -35,7 +35,7 @@ public class SortingStoreSingletone {
     }
 
     private void sort() {
-	//TODO !!!
+	
     }
 
 }

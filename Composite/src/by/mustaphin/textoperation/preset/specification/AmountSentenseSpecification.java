@@ -22,8 +22,8 @@ public class AmountSentenseSpecification implements Specification {
 	if (Type.TEXT == type) {
 	    Collections.sort(component, new Comparator<Component>() {
 		@Override
-		public int compare(Component o1, Component o2) {
-		    return o1.getData().size() - o2.getData().size();
+		public int compare(Component firtsComponent, Component secondComponent) {
+		    return firtsComponent.getData().size() - secondComponent.getData().size();
 		}
 
 	    });
