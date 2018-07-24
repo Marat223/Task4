@@ -49,8 +49,8 @@ public class Composite implements Component {
     }
 
     @Override
-    public List<Component> getData() {//TODO
-	return innerComponent;
+    public List<Component> getData() {
+	return new ArrayList<>(innerComponent);
     }
 
 }

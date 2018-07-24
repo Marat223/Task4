@@ -38,28 +38,29 @@ public class Handler {
     }
 
     public void handleRequest(final ArrayList<String> DATA, Component component) {
-	textAppearsLeaf(DATA, component);//TODO седелать что бы остальные звенья проверки могли не вызываться
-	List<String> handled = new ArrayList<>();
-	Pattern pattern = Pattern.compile(preset.getRegularExpression());
-	List<Component> components = findComposite(component);
-	int index = 0;
-	for (String string : DATA) {
-	    Matcher matcher = pattern.matcher(string);
-	    while (matcher.find()) {
-		String text = matcher.group();
+	if (!textAppearsLeaf(DATA, component)) {
+	    List<String> handled = new ArrayList<>();
+	    Pattern pattern = Pattern.compile(preset.getRegularExpression());
+	    List<Component> components = findComposite(component);
+	    int index = 0;
+	    for (String string : DATA) {
+		Matcher matcher = pattern.matcher(string);
+		while (matcher.find()) {
+		    String text = matcher.group();
 //		Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME);//TODO create correct regular expression for finding single lexeme
-		Leaf leaf = null;
-		if (null != leaf) {
-		    components.get(index).add(leaf);
-		} else {
-		    handled.add(text);
-		    components.get(index).add(new Composite(preset));
+		    Leaf leaf = null;
+		    if (null != leaf) {
+			components.get(index).add(leaf);
+		    } else {
+			handled.add(text);
+			components.get(index).add(new Composite(preset));
+		    }
 		}
+		index++;
 	    }
-	    index++;
+	    DATA.clear();
+	    DATA.addAll(handled);
 	}
-	DATA.clear();
-	DATA.addAll(handled);
     }
 
     protected List<Component> findComposite(Component component) {
@@ -84,14 +85,18 @@ public class Handler {
 	}
     }
 
-    private void textAppearsLeaf(ArrayList<String> data, Component component) {
-	if (component.getData().isEmpty() && data.size() == 1) {
-	    Leaf leaf = findLeaf(data.get(0), RegularExpression.SINGLE_LEXEME);
+    private boolean textAppearsLeaf(final ArrayList<String> data, Component component) {
+	boolean textIsLeaf = false;
+	if (data.size() == 1 && component.getData().isEmpty()) {
+//	    Leaf leaf = findLeaf(data.get(0), RegularExpression.SINGLE_LEXEME);//TODO create correct regular expression for finding single lexeme
+	    Leaf leaf = null;
 	    if (null != leaf) {
 		component = leaf;
-		data = new ArrayList<>();
+		data.clear();
+		textIsLeaf = true;
 	    }
 	}
+	return textIsLeaf;
     }
 
     protected Leaf findLeaf(String data, String leafRegExp) {
@@ -111,7 +116,7 @@ public class Handler {
 
     public static class DefaultHandlerRequest extends Handler {
 
-	private static DefaultHandlerRequest handler = new DefaultHandlerRequest();//TODO replace definition of regular expression to another location
+	private static DefaultHandlerRequest handler = new DefaultHandlerRequest();
 
 	public static DefaultHandlerRequest getHandler() {
 	    return handler;
