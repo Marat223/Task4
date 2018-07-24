@@ -14,12 +14,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author me
  */
 public class Handler {
+
+    private final Logger LOGGER = Logger.getLogger(Handler.class);
 
     private Handler successor;
     protected AbstractPreset preset;
@@ -54,6 +58,7 @@ public class Handler {
 		    } else {
 			handled.add(text);
 			components.get(index).add(new Composite(preset));
+			LOGGER.log(Level.INFO, "created new branch");
 		    }
 		}
 		index++;
