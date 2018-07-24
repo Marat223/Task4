@@ -18,6 +18,7 @@ import java.util.List;
 public class SortingStore {
 
     private List<Component> component = new ArrayList<>();
+    private int offset = 0;
 
     private SortingStore() {
     }
@@ -36,18 +37,50 @@ public class SortingStore {
 	this.component.add(component);
     }
 
+    public List<Component> get() {
+	sort();
+	return component;
+    }
+
     private void sort() {
-	Component[] arrayComponent = new Component[component.size()];
-	for (int i = 0; i < component.size(); i++) {
-	    arrayComponent[i] = component.get(i);
-	}
 	Collections.sort(component, new Comparator<Component>() {
 	    @Override
 	    public int compare(Component firtsComponent, Component secondComponent) {
-		
+		return comparingInnerComponentsLength(firtsComponent, secondComponent);
+	    }
+	});
+    }
+
+    private int comparingInnerComponentsLength(Component firstSentense, Component secondSentense) {
+	int result = 0;
+	int firstSentenseLexemeLength = findMostLongLexeme(firstSentense, offset);
+	int secondSentenseLexemeLength = findMostLongLexeme(secondSentense, offset);
+	if (firstSentenseLexemeLength == -1 || secondSentenseLexemeLength == -1) {
+	    result = -1;//TODO  убедиться, что -1 это корректно
+	} else if (firstSentenseLexemeLength - secondSentenseLexemeLength == 0) {
+	    offset++;
+	    comparingInnerComponentsLength(firstSentense, secondSentense);
+	} else {
+	    offset = 0;
+	    result = firstSentenseLexemeLength - secondSentenseLexemeLength;
+	}
+	return result;
+    }
+
+    private int findMostLongLexeme(Component sentense, int offset) {
+	List<Component> lexeme = sentense.getData();
+	if (lexeme.size() < offset) {
+	    offset = 0;
+	    return -1;
+	}
+	Collections.sort(lexeme, new Comparator<Component>() {
+	    @Override
+	    public int compare(Component o1, Component o2) {
+		return o1.operate().length() - o1.operate().length();
 	    }
 
 	});
+	return lexeme.get(offset).operate().length();
     }
 
 }

@@ -32,8 +32,8 @@ public class Runner {
 	AbstractPreset paragraphPreset = new SentensePreset(RegularExpression.PARAGRAPH, Type.PARAGRAPH);
 	AbstractPreset textPreset = new TextPreset(Type.TEXT);
 
-	Specification amountSentense = new AmountSentenseSpecification();
-	Specification lengthLexeme = new LengthLexemeSpecification();
+	Specification sortAmountSentense = new AmountSentenseSpecification();
+	Specification sortLengthLexeme = new LengthLexemeSpecification();
 
 	Handler sentenceDivideHandler = new Handler(sentensePreset);
 	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, paragraphPreset);
@@ -44,9 +44,10 @@ public class Runner {
 	Composite component = new Composite(textPreset);
 	paragraphDivideHandler.chain(data, component);
 
-//	System.out.println(component.operate());
-//	System.out.println(component.operate(amountSentense));
-	System.out.println(component.operate(lengthLexeme));
+	System.out.println(component.operate());
+	System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+	System.out.println(component.operate(sortAmountSentense));
+//	System.out.println(component.operate(sortLengthLexeme));
     }
 
 }

@@ -20,14 +20,14 @@ public class LengthLexemeSpecification implements Specification {
      * @param specefied the value of specefied
      */
     @Override
-    public List<Component> specified(List<Component> component, Type type) {
+    public List<Component> specified(final List<Component> component, Type type) {
 	if (Type.PARAGRAPH == type) {
-	    SortingStore sortingStore = SortingStore.getInstanse();
 	    for (Component sentense : component) {
-		sortingStore.addComponent(sentense);
+		SortingStore.getInstanse().addComponent(sentense);
 	    }
-	}else if(Type.TEXT == type){
-	    
+	} else if (Type.TEXT == type) {
+	    component.clear();
+	    component.addAll(SortingStore.getInstanse().get());
 	}
 	return component;
     }
