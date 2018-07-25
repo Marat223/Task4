@@ -51,14 +51,15 @@ public class Handler {
 		Matcher matcher = pattern.matcher(string);
 		while (matcher.find()) {
 		    String text = matcher.group();
-//		Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME);//TODO create correct regular expression for finding single lexeme
+//		Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME_REGULAR_EXPRESSION);//TODO create correct regular expression for finding single lexeme
 		    Leaf leaf = null;
 		    if (null != leaf) {
 			components.get(index).add(leaf);
+			LOGGER.log(Level.INFO, "create leaf");
 		    } else {
 			handled.add(text);
 			components.get(index).add(new Composite(preset));
-			LOGGER.log(Level.INFO, "created new branch");
+			LOGGER.log(Level.INFO, "create branch");
 		    }
 		}
 		index++;
@@ -93,12 +94,13 @@ public class Handler {
     private boolean textAppearsLeaf(final ArrayList<String> data, Component component) {
 	boolean textIsLeaf = false;
 	if (data.size() == 1 && component.getData().isEmpty()) {
-//	    Leaf leaf = findLeaf(data.get(0), RegularExpression.SINGLE_LEXEME);//TODO create correct regular expression for finding single lexeme
+//	    Leaf leaf = findLeaf(data.get(0), RegularExpression.SINGLE_LEXEME_REGULAR_EXPRESSION);//TODO create correct regular expression for finding single lexeme
 	    Leaf leaf = null;
 	    if (null != leaf) {
 		component = leaf;
 		data.clear();
 		textIsLeaf = true;
+		LOGGER.log(Level.INFO, "top level component is leaf");
 	    }
 	}
 	return textIsLeaf;
@@ -121,6 +123,8 @@ public class Handler {
 
     public static class DefaultHandlerRequest extends Handler {
 
+	private final Logger LOGGER = Logger.getLogger(Handler.class);
+
 	private static DefaultHandlerRequest handler = new DefaultHandlerRequest();
 
 	public static DefaultHandlerRequest getHandler() {
@@ -129,13 +133,14 @@ public class Handler {
 
 	@Override
 	public void handleRequest(ArrayList<String> data, Component component) {
-	    Pattern pattern = Pattern.compile(RegularExpression.LEXEME);
+	    Pattern pattern = Pattern.compile(RegularExpression.LEXEME_REGULAR_EXPRESSION);
 	    List<Component> components = findComposite(component);
 	    int index = 0;
 	    for (String string : data) {
 		Matcher matcher = pattern.matcher(string);
 		while (matcher.find()) {
 		    components.get(index).add(new Leaf(matcher.group()));
+		    LOGGER.log(Level.INFO, "create bottom leaf");
 		}
 		index++;
 	    }

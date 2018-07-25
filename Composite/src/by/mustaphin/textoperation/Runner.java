@@ -28,8 +28,8 @@ public class Runner {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-	AbstractPreset sentensePreset = new SentensePreset(RegularExpression.SENTENCE, Type.SENTENSE);
-	AbstractPreset paragraphPreset = new SentensePreset(RegularExpression.PARAGRAPH, Type.PARAGRAPH);
+	AbstractPreset sentensePreset = new SentensePreset(RegularExpression.SENTENCE_REGULAR_EXPRESSION, Type.SENTENSE);
+	AbstractPreset paragraphPreset = new SentensePreset(RegularExpression.PARAGRAPH_REGULAR_EXPRESSION, Type.PARAGRAPH);
 	AbstractPreset textPreset = new TextPreset(Type.TEXT);
 
 	Specification sortAmountSentense = new AmountSentenseSpecification();
@@ -44,10 +44,9 @@ public class Runner {
 	Composite component = new Composite(textPreset);
 	paragraphDivideHandler.chain(data, component);
 
-	System.out.println(component.operate());
-	System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-	System.out.println(component.operate(sortAmountSentense));
-//	System.out.println(component.operate(sortLengthLexeme));
+//	System.out.println(component.operate());
+//	System.out.println(component.operate(sortAmountSentense));
+	System.out.println(component.operate(sortLengthLexeme));
     }
 
 }
