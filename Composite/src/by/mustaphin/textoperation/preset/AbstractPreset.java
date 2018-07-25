@@ -38,4 +38,8 @@ public abstract class AbstractPreset {
 	return regularExpression;
     }
 
+    public Type getType() {
+	return type;
+    }
+
 }

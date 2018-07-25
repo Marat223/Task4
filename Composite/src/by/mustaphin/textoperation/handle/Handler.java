@@ -59,7 +59,7 @@ public class Handler {
 		    } else {
 			handled.add(text);
 			components.get(index).add(new Composite(preset));
-			LOGGER.log(Level.INFO, "create branch");
+			LOGGER.log(Level.INFO, "create branch " + preset.getType());
 		    }
 		}
 		index++;

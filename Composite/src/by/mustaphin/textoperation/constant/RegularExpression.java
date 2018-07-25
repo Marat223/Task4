@@ -18,6 +18,5 @@ public class RegularExpression {
     public static final String SENTENCE_REGULAR_EXPRESSION = "\\s+[^.!?]*[.!?]{1,3}";
     public static final String LEXEME_REGULAR_EXPRESSION = "\\w+[!?,.]*|[...]\\p{Blank}+";
     public static final String SINGLE_LEXEME_REGULAR_EXPRESSION = "\\w+[!?,.]*|[...]\\p{Blank}+?<!(\\s{1}\\w+)";
-    public static final String EMPTY_REGULAR_EXPRESSION = "";
 
 }
