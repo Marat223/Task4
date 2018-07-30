@@ -51,8 +51,7 @@ public class Handler {
 		Matcher matcher = pattern.matcher(string);
 		while (matcher.find()) {
 		    String text = matcher.group();
-//		Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME_REGULAR_EXPRESSION);//TODO create correct regular expression for finding single lexeme
-		    Leaf leaf = null;
+		    Leaf leaf = findLeaf(text, RegularExpression.SINGLE_LEXEME_REGULAR_EXPRESSION);//TODO create correct regular expression for finding single lexeme
 		    if (null != leaf) {
 			components.get(index).add(leaf);
 			LOGGER.log(Level.INFO, "create leaf");
@@ -94,8 +93,7 @@ public class Handler {
     private boolean textAppearsLeaf(final ArrayList<String> data, Component component) {
 	boolean textIsLeaf = false;
 	if (data.size() == 1 && component.getData().isEmpty()) {
-//	    Leaf leaf = findLeaf(data.get(0), RegularExpression.SINGLE_LEXEME_REGULAR_EXPRESSION);//TODO create correct regular expression for finding single lexeme
-	    Leaf leaf = null;
+	    Leaf leaf = findLeaf(data.get(0), RegularExpression.SINGLE_LEXEME_REGULAR_EXPRESSION);//TODO create correct regular expression for finding single lexeme
 	    if (null != leaf) {
 		component = leaf;
 		data.clear();

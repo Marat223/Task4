@@ -13,7 +13,6 @@ import by.mustaphin.textoperation.preset.SentensePreset;
 import by.mustaphin.textoperation.preset.TextPreset;
 import by.mustaphin.textoperation.preset.Type;
 import by.mustaphin.textoperation.preset.specification.AmountSentenseSpecification;
-import by.mustaphin.textoperation.preset.specification.LengthLexemeSpecification;
 import by.mustaphin.textoperation.preset.specification.Specification;
 import by.mustaphin.textoperation.utill.TextReader;
 import java.util.ArrayList;
@@ -33,7 +32,6 @@ public class Runner {
 	AbstractPreset textPreset = new TextPreset(Type.TEXT);
 
 	Specification sortAmountSentense = new AmountSentenseSpecification();
-	Specification sortLengthLexeme = new LengthLexemeSpecification();
 
 	Handler sentenceDivideHandler = new Handler(sentensePreset);
 	Handler paragraphDivideHandler = new Handler(sentenceDivideHandler, paragraphPreset);
@@ -46,7 +44,6 @@ public class Runner {
 
 	System.out.println(component.operate());
 //	System.out.println(component.operate(sortAmountSentense));
-//	System.out.println(component.operate(sortLengthLexeme));
     }
 
 }
